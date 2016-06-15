@@ -8,10 +8,10 @@ public class PizzaType {
     public String name = "";
     public int ratio = 0;
 
-    public PizzaType(int id, String name, int ratio){
-        id = id;
-        name = name;
-        ratio = ratio;
+    public PizzaType(int _id, String _name, int _ratio){
+        id = _id;
+        name = _name;
+        ratio = _ratio;
     }
 
     public String toString(){
