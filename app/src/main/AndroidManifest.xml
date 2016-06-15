@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.arpcentral.pizzadoh">
+    android:name=".PizzaDohApp"
+    package="net.arpcentral.pizzadoh"
+    android:versionCode="1"
+    android:versionName="0.1">
 
     <application
         android:allowBackup="true"
@@ -26,6 +29,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="net.arpcentral.pizzadoh.WelcomeActivity" />
+        </activity>
+        <activity
+            android:name=".SelectAmountActivity"
+            android:label="@string/title_activity_select_amount"
+            android:parentActivityName=".SelectPizzaTypeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.arpcentral.pizzadoh.SelectPizzaTypeActivity" />
         </activity>
     </application>
 

@@ -10,5 +10,6 @@
     <string name="technique_caption">Quality flour. Accurate Measurements. Now it is up to you. Practice makes perfect so bake a lot of pizza.</string>
     <string name="title_activity_pizza_type">PizzaType</string>
     <string name="type_question">What type of pizza are you making?</string>
+    <string name="title_activity_select_amount">SelectAmountActivity</string>
 
 </resources>

@@ -1,5 +1,5 @@
 package net.arpcentral.pizzadoh;
-
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -50,10 +50,24 @@ public class SelectPizzaTypeActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i > 0) {
-                    Log.d("Spinner", "Something selected" + i);
-                } else {
-                    Log.d("Spinner", "Something NOT NOT selected" + i);
+                    int ratio = 0;
+                    switch (i){
+                        case 1:  ratio = 65;
+                                break;
+                        case 2:  ratio = 67;
+                                break;
+                        case 3:  ratio = 70;
+
+                        default: ratio = 0;
+                                break;
+                    }
+
+                    FloatingActionButton fab_c = (FloatingActionButton) findViewById(R.id.continue_to_amount);
+                    fab_c.show();
+
                 }
+
+
             }
 
             public void onNothingSelected(AdapterView<?> adapterView) {
