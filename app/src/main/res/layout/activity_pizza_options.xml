@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".SelectPizzaTypeActivity">
+    tools:context=".SelectOptionsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,18 +21,18 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_pizza_type" />
-
+    <include layout="@layout/content_pizza_options" />
+<!--
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/restart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
+        android:layout_gravity="bottom|start"
         android:tint="@color/colorPrimaryDark"
         android:layout_margin="@dimen/fab_margin"
         android:textColor="@android:color/white"
         android:src="@android:drawable/ic_menu_revert" />
-
+-->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/continue_to_amount"
         android:visibility="invisible"

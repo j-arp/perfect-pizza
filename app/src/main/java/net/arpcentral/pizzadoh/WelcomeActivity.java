@@ -22,7 +22,7 @@ public class WelcomeActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), SelectPizzaTypeActivity.class));
+                startActivity(new Intent(view.getContext(), SelectOptionsActivity.class));
             }
         });
     }

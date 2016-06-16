@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SelectPizzaTypeActivity"
+            android:name=".SelectOptionsActivity"
             android:label="@string/title_activity_pizza_type"
             android:parentActivityName=".WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -31,13 +31,13 @@
                 android:value="net.arpcentral.pizzadoh.WelcomeActivity" />
         </activity>
         <activity
-            android:name=".SelectAmountActivity"
-            android:label="@string/title_activity_select_amount"
-            android:parentActivityName=".SelectPizzaTypeActivity"
+            android:name=".DetailsActivity"
+            android:label="@string/title_activity_details"
+            android:parentActivityName=".SelectOptionsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="net.arpcentral.pizzadoh.SelectPizzaTypeActivity" />
+                android:value="net.arpcentral.pizzadoh.SelectOptionsActivity" />
         </activity>
     </application>
 
