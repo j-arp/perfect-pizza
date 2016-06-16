@@ -24,16 +24,15 @@ public class DetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String type =       intent.getStringExtra("TYPE");
         String amount =       intent.getStringExtra("AMOUNT");
-        Log.d("dets act", "getting type " + type + " and amount " + amount);
 
         Ratio ratio = new Ratio(type, Integer.parseInt(amount));
 
-        Log.d("dets act", "Ratio is " + ratio.flour);
+        Log.d("dets act", "Ratio is flour: " + ratio.flour + " water: " + ratio.water);
 
         TextView flour_details = (TextView)findViewById(R.id.flour_details_data);
-        flour_details.setText(ratio.flour);
-
-
+        flour_details.setText(ratio.flour.toString());
+        TextView water_details = (TextView)findViewById(R.id.water_details_data);
+        water_details.setText(ratio.water.toString());
 
     }
 
