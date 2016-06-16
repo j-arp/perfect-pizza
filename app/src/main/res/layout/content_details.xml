@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,137 +16,164 @@
     tools:showIn="@layout/activity_details"
     android:layout_centerInParent="true">
 
-    <RelativeLayout
-        android:id="@+id/starter_container"
+</RelativeLayout>
+
+
+<RelativeLayout
+    android:id="@+id/flour_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey"
+    >
+
+
+    <ImageView
+        android:id="@+id/flour_details_img"
+        android:src="@drawable/flour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/flour_details_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey"
+        android:layout_below="@+id/flour_details_img"
         >
 
         <TextView
-            android:id="@+id/starter_container_title"
+            android:id="@+id/flour_details_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="@string/flour_title"
+            android:textSize="48sp"
+            android:gravity="bottom|start"
+            android:textIsSelectable="false" />
+
+
+        <TextView
+            android:id="@+id/flour_details_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="500"
+            android:textSize="48sp"
+            android:gravity="bottom|end" />
+    </LinearLayout>
+</RelativeLayout>
+
+<RelativeLayout
+    android:id="@+id/water_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey"
+    android:layout_below="@+id/flour_container"
+    >
+
+
+    <ImageView
+        android:id="@+id/water_details_img"
+        android:src="@drawable/water"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/water_details_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/water_details_img"
+        >
+
+        <TextView
+            android:id="@+id/water_details_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="@string/water_title"
+            android:textSize="48sp"
+            android:gravity="bottom|start"
+            android:textIsSelectable="false" />
+
+
+        <TextView
+            android:id="@+id/water_details_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="375"
+            android:textSize="48sp"
+            android:gravity="bottom|end" />
+    </LinearLayout>
+</RelativeLayout>
+
+
+
+
+<RelativeLayout
+    android:id="@+id/starter_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey"
+    android:layout_below="@id/water_container"
+    >
+
+    <TextView
+        android:id="@+id/starter_container_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Starter"
+        android:textSize="42sp"/>
+
+    <RelativeLayout
+        android:id="@+id/flour_starter_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/starter_container_title">
+
+        <TextView
+            android:id="@+id/flour_starter_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Starter"
-            android:textSize="42sp"/>
+            android:text="@string/flour_title"
+            android:textAlignment="center"
+            android:textSize="32dp"
+            />
 
-        <RelativeLayout
-            android:id="@+id/flour_starter_container"
+        <TextView
+            android:id="@+id/flour_starter_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/starter_container_title">
-
-            <TextView
-                android:id="@+id/flour_starter_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/flour_title"
-                android:textAlignment="center"
-                android:textSize="32dp"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Measure ment goes here"
-                android:textAlignment="center"
-                android:layout_below="@+id/flour_starter_title"
-                android:textSize="24dp"
-                />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/flour_starter_container">
-
-            <TextView
-                android:id="@+id/water_starter_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/water_title"
-                android:textAlignment="center"
-                android:textSize="32dp"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Measure ment goes here"
-                android:textAlignment="center"
-                android:layout_below="@+id/water_starter_title"
-                android:textSize="24sp"
-                />
-        </RelativeLayout>
+            android:text="Measure ment goes here"
+            android:textAlignment="center"
+            android:layout_below="@+id/flour_starter_title"
+            android:textSize="24dp"
+            />
     </RelativeLayout>
 
+
     <RelativeLayout
-        android:id="@+id/details_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey"
-        android:layout_below="@id/starter_container"
-        android:layout_marginTop="40px"
-        >
+        android:layout_below="@+id/flour_starter_container">
 
         <TextView
-            android:id="@+id/details_container_title"
+            android:id="@+id/water_starter_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Measurements"
-            android:textSize="42sp"/>
+            android:text="@string/water_title"
+            android:textAlignment="center"
+            android:textSize="32dp"
+            />
 
-        <RelativeLayout
-            android:id="@+id/flour_details_container"
+
+        <TextView
+            android:id="@+id/water_starter_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/details_container_title">
-
-            <TextView
-                android:id="@+id/flour_details_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/flour_title"
-                android:textAlignment="center"
-                android:textSize="32dp"
-                />
-
-            <TextView
-                android:id="@+id/flour_details_data"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Measure ment goes here"
-                android:textAlignment="center"
-                android:layout_below="@+id/flour_details_title"
-                android:textSize="24dp"
-                />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/flour_details_container">
-
-            <TextView
-                android:id="@+id/water_details_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/water_title"
-                android:textAlignment="center"
-                android:textSize="32dp"
-                />
-
-            <TextView
-                android:id="@+id/water_details_data"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Measure ment goes here"
-                android:textAlignment="center"
-                android:layout_below="@+id/water_details_title"
-                android:textSize="24sp"
-                />
-        </RelativeLayout>
+            android:text="Measure ment goes here"
+            android:textAlignment="center"
+            android:layout_below="@+id/water_starter_title"
+            android:textSize="24sp"
+            />
     </RelativeLayout>
 </RelativeLayout>
+
+</ScrollView>

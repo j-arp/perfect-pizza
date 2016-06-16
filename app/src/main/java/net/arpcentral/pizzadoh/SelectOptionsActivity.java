@@ -20,6 +20,7 @@ public class SelectOptionsActivity extends AppCompatActivity {
     static Button details_button = null;
     public final static int AMOUNT = 0;
     public final static String TYPE = "";
+    public final static String USE_STARTER = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class SelectOptionsActivity extends AppCompatActivity {
 
         details_button = (Button) this.findViewById(R.id.details_button);
         amount_spinner = (Spinner) this.findViewById(R.id.pizza_amount_spinner);
+        starter_toggle = (ToggleButton) this.findViewById(R.id.use_a_starter);
 
         type_spinner = (Spinner) this.findViewById(R.id.pizza_type_spinner);
         ArrayAdapter typeSpinnerArrayAdapter = new ArrayAdapter(this,
@@ -97,14 +99,23 @@ public class SelectOptionsActivity extends AppCompatActivity {
             }
         });
 
+        starter_toggle.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+
+            }
+        });
+
         details_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String type = type_spinner.getItemAtPosition(type_spinner.getSelectedItemPosition()).toString();
                 String amount = amount_spinner.getItemAtPosition(amount_spinner.getSelectedItemPosition()).toString();
+                Boolean use_starter = starter_toggle.isChecked();
                 Intent intent = new Intent(view.getContext(), DetailsActivity.class);
                 intent.putExtra("TYPE", type);
                 intent.putExtra("AMOUNT", amount);
-                Log.d("select", "getting type " + type + " and amount " + amount );
+                intent.putExtra("USING_STARTER", use_starter);
+                Log.d("SELECT OPTIONS ACTIVITY", "getting type " + type + " and amount " + amount + " and using a starter? " +  use_starter);
                 startActivity(intent);
 
             }

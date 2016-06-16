@@ -33,6 +33,8 @@
             android:textAlignment="center"
             android:layout_below="@+id/flour_title"
             />
+
+
     </RelativeLayout>
 
     <RelativeLayout
