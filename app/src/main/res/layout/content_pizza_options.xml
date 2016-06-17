@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/type_question"
-            android:textSize="32dp"/>
+            android:textSize="@dimen/medium_text"/>
 
         <Spinner
             android:id="@+id/pizza_type_spinner"
@@ -32,11 +32,12 @@
             android:spinnerMode="dropdown"
             android:textColor = "@color/colorPrimary"
             android:textSize="32dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:background="@drawable/bottom_border">
         </Spinner>
 
     </RelativeLayout>
-
 
     <RelativeLayout
         android:id="@+id/select_amount_spinner_container"
@@ -49,8 +50,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/amount_question"
-            android:textSize="32dp"
-            android:layout_marginTop="30dp"/>
+            android:textSize="@dimen/medium_text"
+            />
         <Spinner
             android:id="@+id/pizza_amount_spinner"
             android:layout_width="match_parent"
@@ -58,7 +59,9 @@
             android:layout_below="@+id/how_many_question"
             android:spinnerMode="dropdown"
             android:textColor = "@color/colorPrimary"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bottom_border"
+            android:padding="10dp">
         </Spinner>
     </RelativeLayout>
 

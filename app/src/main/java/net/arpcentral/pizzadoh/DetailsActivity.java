@@ -26,6 +26,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Secret To Your Perfect Crust");
 
         Intent intent = getIntent();
 
