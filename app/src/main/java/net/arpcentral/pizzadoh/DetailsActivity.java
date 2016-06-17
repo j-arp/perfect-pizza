@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class DetailsActivity extends AppCompatActivity {
-
+    static FloatingActionButton reset_button = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +24,7 @@ public class DetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
+        reset_button = (FloatingActionButton) this.findViewById(R.id.reset_button);
         String type =       intent.getStringExtra("TYPE");
         String amount =       intent.getStringExtra("AMOUNT");
         Boolean use_starter = intent.getBooleanExtra("USING_STARTER", false);
@@ -48,6 +49,15 @@ public class DetailsActivity extends AppCompatActivity {
         flour_details.setText(ratio.getAdjustedFlour().toString());
         TextView water_details = (TextView)findViewById(R.id.water_details_data);
         water_details.setText(ratio.getAdjustedWater().toString());
+
+
+        reset_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), WelcomeActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
     }
 

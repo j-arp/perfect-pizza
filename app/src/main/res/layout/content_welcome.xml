@@ -35,7 +35,7 @@
         android:id="@+id/flour_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp">
+        android:layout_below="@+id/dough_img">
 
         <TextView
             android:id="@+id/flour_title"
@@ -130,6 +130,14 @@
             android:layout_below="@+id/technique_title"
             />
     </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="100dp"
+            android:layout_marginTop="200dp">
+
+        </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
 

@@ -55,8 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/how_many_question"
             android:spinnerMode="dropdown"
-            android:textColor = "@color/colorPrimary"
-            android:textSize="42sp">
+            android:textColor = "@color/colorPrimary">
         </Spinner>
     </RelativeLayout>
 

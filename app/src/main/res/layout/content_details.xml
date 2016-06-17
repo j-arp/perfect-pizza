@@ -17,20 +17,123 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
+
+
+
     <RelativeLayout
         android:id="@+id/detail_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
+        <RelativeLayout
+            android:id="@+id/starter_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+        <!-- Starter Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:id="@+id/starter_container_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Starter"
+                android:textSize="@dimen/large_text"
+                android:textColor="@color/colorPrimaryDark"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="start"
+                    android:layout_weight="1">
+
+
+                    <TextView
+                        android:id="@+id/flour_starter_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/flour_title"
+                        android:textAlignment="center"
+                        android:layout_marginRight="20dp"
+                        android:textSize="@dimen/medium_text"
+                        android:textColor="@color/colorAccent"
+                        />
+
+                    <TextView
+                        android:id="@+id/flour_starter_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:textAlignment="center"
+                        android:layout_below="@+id/flour_starter_title"
+                        android:textSize="@dimen/regular_text"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:layout_gravity="end">
+
+
+
+                    <TextView
+                        android:id="@+id/water_starter_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/water_title"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/medium_text"
+                        android:layout_marginRight="20dp"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/water_starter_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="150"
+                        android:textAlignment="center"
+                        android:layout_below="@+id/water_starter_title"
+                        android:textSize="@dimen/regular_text"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+        </RelativeLayout>
+
         <!-- Flour Card -->
         <RelativeLayout
             android:id="@+id/flour_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/grey"
             android:layout_marginTop="@dimen/card_horizonal_padding"
-
+            android:layout_below="@id/starter_container"
             >
 
 
@@ -40,19 +143,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    />
+                android:fadingEdgeLength="20dp"
+                android:fadingEdge="horizontal|vertical"
+                android:layout_marginBottom="20dp" />
 
             <LinearLayout
                 android:id="@+id/flour_details_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                >
+                android:backgroundTint="#cc0000">
 
                 <TextView
                     android:id="@+id/flour_details_title"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
@@ -96,7 +201,6 @@
                 android:id="@+id/water_details_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 >
@@ -107,6 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:text="@string/water_title"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/large_text"
                     android:gravity="bottom|start"
                     android:textIsSelectable="false" />
@@ -122,78 +227,6 @@
             </LinearLayout>
         </RelativeLayout>
 
-
-
-        <!-- Starter Card -->
-        <RelativeLayout
-            android:id="@+id/starter_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/grey"
-            android:layout_below="@id/water_container"
-            android:layout_marginTop="@dimen/card_horizonal_padding"
-            >
-
-            <TextView
-                android:id="@+id/starter_container_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Starter"
-                android:textSize="@dimen/large_text"/>
-
-            <RelativeLayout
-                android:id="@+id/flour_starter_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/starter_container_title">
-
-                <TextView
-                    android:id="@+id/flour_starter_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/flour_title"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/medium_text"
-                    />
-
-                <TextView
-                    android:id="@+id/flour_starter_data"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="100"
-                    android:textAlignment="center"
-                    android:layout_below="@+id/flour_starter_title"
-                    android:textSize="@dimen/regular_text"
-                    />
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/flour_starter_container">
-
-                <TextView
-                    android:id="@+id/water_starter_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/water_title"
-                    android:textAlignment="center"
-                    android:textSize="32dp"
-                    />
-
-
-                <TextView
-                    android:id="@+id/water_starter_data"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="150"
-                    android:textAlignment="center"
-                    android:layout_below="@+id/water_starter_title"
-                    android:textSize="24sp"
-                    />
-            </RelativeLayout>
-        </RelativeLayout>
 
     </RelativeLayout>
 </ScrollView>
