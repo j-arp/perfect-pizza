@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 
@@ -43,7 +44,7 @@ public class SelectOptionsActivity extends AppCompatActivity {
                 new PizzaType(2, "New York", 4),
                 new PizzaType(3, "Pan", 5)
         });
-        Integer[] amounts = new Integer[]{2, 4, 6, 8, 10, 12};
+        Integer[] amounts = new Integer[]{0, 2, 4, 6, 8, 10, 12};
         ArrayAdapter<Integer> amountSpinnerArrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, amounts);
         amountSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         amount_spinner.setAdapter(amountSpinnerArrayAdapter);
@@ -57,22 +58,6 @@ public class SelectOptionsActivity extends AppCompatActivity {
         type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i > 0) {
-                    int ratio = 0;
-                    switch (i) {
-                        case 1:
-                            ratio = 65;
-                            break;
-                        case 2:
-                            ratio = 67;
-                            break;
-                        case 3:
-                            ratio = 70;
-
-                        default:
-                            ratio = 0;
-                            break;
-                    }
-                    Log.d("type selected", "turn amount on" + amount_spinner);
                     findViewById(R.id.select_amount_spinner_container).setVisibility(View.VISIBLE);
                 }
             }
@@ -89,7 +74,7 @@ public class SelectOptionsActivity extends AppCompatActivity {
                 if (i > 0) {
                     findViewById(R.id.select_if_using_starter_container).setVisibility(View.VISIBLE);
                     findViewById(R.id.continue_button_container).setVisibility(View.VISIBLE);
-                    int amount = (i + 1) * 2;
+                    String amount = amount_spinner.getItemAtPosition(amount_spinner.getSelectedItemPosition()).toString();
                     Log.d("amount selected", "turn amount on" + amount);
 
                 }

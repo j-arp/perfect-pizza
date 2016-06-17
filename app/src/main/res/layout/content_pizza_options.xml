@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:text="@string/type_question"
             android:textSize="32dp"/>
+
         <Spinner
             android:id="@+id/pizza_type_spinner"
             android:layout_width="match_parent"
@@ -32,6 +33,7 @@
             android:textColor = "@color/colorPrimary"
             android:textSize="32dp">
         </Spinner>
+
     </RelativeLayout>
 
 
@@ -63,27 +65,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/select_amount_spinner_container"
-        android:visibility="invisible">
-
-        <TextView
-            android:id="@+id/using_starter_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/starter_question"
-            android:textSize="32dp"/>
-
-        <ToggleButton
+        android:visibility="visible">
+        <LinearLayout
             android:layout_marginTop="20pt"
-            android:textOff="Not using a starter"
-            android:textOn="Using a starter"
-            android:id="@+id/use_a_starter"
-            android:layout_below="@+id/using_starter_question"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/yes_for_starter"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:textColor="@color/white"
-            android:checked="true" />
+            >
+           
+            <ToggleButton
+                android:textOff="Don't Use"
+                android:textOn="Use"
+                android:id="@+id/use_a_starter"
+                android:layout_below="@+id/using_starter_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yes_for_starter"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:textColor="@color/white"
+                android:checked="true"
+                android:minWidth="120dp"/>
+
+            <TextView
+                android:id="@+id/using_starter_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/starter_question"
+                android:textSize="@dimen/small_text"/>
+        </LinearLayout>
 
 
     </RelativeLayout>

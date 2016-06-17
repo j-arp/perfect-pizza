@@ -1,21 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/no_margin"
+    android:paddingRight="@dimen/no_margin"
+    android:paddingTop="@dimen/no_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="net.arpcentral.pizzadoh.WelcomeActivity"
-    tools:showIn="@layout/activity_welcome">
+    tools:showIn="@layout/activity_welcome"
+    android:clipToPadding="false">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="140px">
+
+
+    <ImageView
+        android:id="@+id/dough_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dough"
+        android:adjustViewBounds="true"/>
 
     <RelativeLayout
         android:id="@+id/flour_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp">
 
         <TextView
             android:id="@+id/flour_title"
@@ -23,16 +43,31 @@
             android:layout_height="wrap_content"
             android:text="@string/flour_title"
             android:textAlignment="center"
-            android:textSize="50dp"
+            android:textSize="@dimen/large_text"
             />
+        <ImageView
+            android:id="@+id/flour_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_flour"
+            android:layout_centerInParent="true"
+            android:tint="@color/colorPrimaryDark"
+            android:contentDescription="Flour"
+            android:layout_below="@+id/flour_title"
+            android:adjustViewBounds="true"
 
+            android:scaleX="2.5"
+            android:scaleY="2.5"
+            android:saveEnabled="false"
+            android:layout_margin="40px" />
         <TextView
+            android:id="@+id/flour_caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/flour_caption"
             android:textAlignment="center"
-            android:layout_below="@+id/flour_title"
-            />
+            android:layout_below="@+id/flour_img"
+            android:layout_marginTop="20dp" />
 
 
     </RelativeLayout>
@@ -41,22 +76,34 @@
         android:id="@+id/ratios_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/flour_card">
+        android:layout_below="@+id/flour_card"
+        android:layout_marginTop="40dp">
         <TextView
             android:id="@+id/ratios_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ratios_title"
             android:textAlignment="center"
-            android:textSize="50dp"
+            android:textSize="@dimen/large_text"
             />
-
+        <ImageView
+            android:id="@+id/scales_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/scales"
+            android:layout_centerInParent="true"
+            android:tint="@color/colorPrimaryDark"
+            android:scaleX=".5"
+            android:scaleY=".5"
+            android:contentDescription="Scales"
+            android:cropToPadding="false"
+            android:adjustViewBounds="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ratios_caption"
             android:textAlignment="center"
-            android:layout_below="@+id/ratios_title"
+            android:layout_below="@+id/scales_img"
             />
     </RelativeLayout>
 
@@ -64,14 +111,15 @@
         android:id="@+id/technique_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ratios_card">
+        android:layout_below="@+id/ratios_card"
+        android:layout_marginTop="40dp">
         <TextView
             android:id="@+id/technique_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/technique_title"
             android:textAlignment="center"
-            android:textSize="50dp"
+            android:textSize="@dimen/large_text"
             />
 
         <TextView
@@ -82,5 +130,7 @@
             android:layout_below="@+id/technique_title"
             />
     </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
