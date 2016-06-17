@@ -59,7 +59,7 @@
             android:scaleX="2.5"
             android:scaleY="2.5"
             android:saveEnabled="false"
-            android:layout_margin="40px" />
+            android:layout_margin="40dp" />
         <TextView
             android:id="@+id/flour_caption"
             android:layout_width="wrap_content"

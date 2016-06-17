@@ -20,6 +20,8 @@ public class SelectOptionsActivity extends AppCompatActivity {
     static Spinner amount_spinner = null;
     static Switch starter_toggle = null;
     static FloatingActionButton calculate_button = null;
+    static TextView using_starter_question = null;
+
     public final static int AMOUNT = 0;
     public final static String TYPE = "";
     public final static String USE_STARTER = "";
@@ -33,6 +35,7 @@ public class SelectOptionsActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        using_starter_question = (TextView) this.findViewById(R.id.using_starter_question);
         calculate_button = (FloatingActionButton) this.findViewById(R.id.calculate);
         amount_spinner = (Spinner) this.findViewById(R.id.pizza_amount_spinner);
         starter_toggle = (Switch) this.findViewById(R.id.use_a_starter);
@@ -87,7 +90,13 @@ public class SelectOptionsActivity extends AppCompatActivity {
 
         starter_toggle.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                if ( starter_toggle.isChecked() ){
 
+                }
+
+                else {
+
+                }
 
             }
         });
