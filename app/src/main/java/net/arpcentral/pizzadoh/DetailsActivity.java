@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,8 +39,11 @@ public class DetailsActivity extends AppCompatActivity {
         Log.d("DETAIL ACTIVITY", "Ratio is flour: " + ratio.flour + " water: " + ratio.water + " and are you using a starter? " + use_starter);
 
         if (use_starter){
-            TextView flour_starter_details = (TextView)findViewById(R.id.flour_starter_data);
-            flour_starter_details.setText("100");
+            NumberPicker flour_starter_details = (NumberPicker)findViewById(R.id.flour_starter_data);
+            flour_starter_details.setMaxValue(1000);
+            flour_starter_details.setMinValue(100);
+
+            flour_starter_details.setValue(100);
             TextView water_starter_details = (TextView)findViewById(R.id.water_starter_data);
             water_starter_details.setText("150");
         }
