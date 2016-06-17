@@ -1,7 +1,9 @@
 package net.arpcentral.pizzadoh;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -25,6 +27,7 @@ public class SelectOptionsActivity extends AppCompatActivity {
     public final static int AMOUNT = 0;
     public final static String TYPE = "";
     public final static String USE_STARTER = "";
+    public final static Float FADED = new Float(.4);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,8 @@ public class SelectOptionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pizza_options);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Select Pizza Options");
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -91,11 +96,11 @@ public class SelectOptionsActivity extends AppCompatActivity {
         starter_toggle.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if ( starter_toggle.isChecked() ){
-
+                    using_starter_question.setAlpha(1);
                 }
 
                 else {
-
+                    using_starter_question.setAlpha(FADED);
                 }
 
             }

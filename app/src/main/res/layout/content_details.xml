@@ -67,7 +67,7 @@
                         android:id="@+id/flour_starter_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/flour_title"
+                        android:text="@string/flour_label"
                         android:textAlignment="center"
                         android:layout_marginRight="20dp"
                         android:textSize="@dimen/medium_text"
@@ -100,7 +100,7 @@
                         android:id="@+id/water_starter_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/water_title"
+                        android:text="@string/water_label"
                         android:textColor="@color/colorAccent"
                         android:textSize="@dimen/medium_text"
                         android:layout_marginRight="20dp"
@@ -138,12 +138,13 @@
 
 
             <ImageView
-                    android:id="@+id/flour_details_img"
-                    android:src="@drawable/flour"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
+                android:id="@+id/flour_details_img"
+                android:src="@drawable/flour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
                 android:fadingEdgeLength="20dp"
+                android:alpha=".6"
                 android:fadingEdge="horizontal|vertical"
                 android:layout_marginBottom="20dp" />
 
@@ -161,7 +162,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
-                    android:text="@string/flour_title"
+                    android:text="@string/flour_label"
                     android:textSize="@dimen/large_text"
                     android:gravity="bottom|start"
                     android:textIsSelectable="false" />
@@ -193,6 +194,7 @@
                 android:id="@+id/water_details_img"
                 android:src="@drawable/water"
                 android:layout_width="match_parent"
+                android:alpha=".6"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 />
@@ -210,7 +212,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
-                    android:text="@string/water_title"
+                    android:text="@string/water_label"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/large_text"
                     android:gravity="bottom|start"

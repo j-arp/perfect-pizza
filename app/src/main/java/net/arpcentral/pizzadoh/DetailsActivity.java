@@ -19,7 +19,13 @@ public class DetailsActivity extends AppCompatActivity {
         Log.d("DETAIL ACTIVITY", "REACHED");
         setContentView(R.layout.activity_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
+
+
+
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("My title");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -44,11 +50,13 @@ public class DetailsActivity extends AppCompatActivity {
 
         }
 
+        int adjusted_flour = (int) Math.round(ratio.getAdjustedFlour());
+        int adjusted_water = (int) Math.round(ratio.getAdjustedWater());
 
         TextView flour_details = (TextView)findViewById(R.id.flour_details_data);
-        flour_details.setText(ratio.getAdjustedFlour().toString());
+        flour_details.setText(Integer.toString(adjusted_flour));
         TextView water_details = (TextView)findViewById(R.id.water_details_data);
-        water_details.setText(ratio.getAdjustedWater().toString());
+        flour_details.setText(Integer.toString(adjusted_water));
 
 
         reset_button.setOnClickListener(new View.OnClickListener() {
