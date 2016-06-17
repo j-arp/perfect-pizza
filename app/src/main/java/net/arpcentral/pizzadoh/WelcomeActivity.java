@@ -18,12 +18,10 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-       // getSupportActionBar().setLogo(R.drawable.slice);
         getSupportActionBar().setTitle("Perfect Pizza Forever");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.start);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton start_button = (FloatingActionButton) findViewById(R.id.start);
+        start_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(view.getContext(), SelectOptionsActivity.class));
@@ -40,14 +38,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        // if the menu item clicked is "About", fire off that activity
         if (id == R.id.action_about) {
-            Log.d("WELCOME ACT", "Get settings");
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
             return true;

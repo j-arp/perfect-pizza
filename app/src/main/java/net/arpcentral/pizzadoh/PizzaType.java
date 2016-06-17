@@ -1,8 +1,5 @@
 package net.arpcentral.pizzadoh;
 
-/**
- * Created by jarp on 6/15/16.
- */
 public class PizzaType {
     public int id = 0;
     public String name = "";

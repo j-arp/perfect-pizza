@@ -40,12 +40,14 @@ public class SelectOptionsActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // Assign all the UI elements
         using_starter_question = (TextView) this.findViewById(R.id.using_starter_question);
         calculate_button = (FloatingActionButton) this.findViewById(R.id.calculate);
         amount_spinner = (Spinner) this.findViewById(R.id.pizza_amount_spinner);
         starter_toggle = (Switch) this.findViewById(R.id.use_a_starter);
-
         type_spinner = (Spinner) this.findViewById(R.id.pizza_type_spinner);
+
+        // Array Adapter for Pizza Type Spinner
         ArrayAdapter typeSpinnerArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, new PizzaType[]{
                 new PizzaType(0, "Type of Pizza?", 0),
@@ -53,6 +55,8 @@ public class SelectOptionsActivity extends AppCompatActivity {
                 new PizzaType(2, "New York", 4),
                 new PizzaType(3, "Pan", 5)
         });
+
+        // Array Adapter for Amount Spinner
         Integer[] amounts = new Integer[]{0, 2, 4, 6, 8, 10, 12};
         ArrayAdapter<Integer> amountSpinnerArrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, amounts);
         amountSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
@@ -62,8 +66,10 @@ public class SelectOptionsActivity extends AppCompatActivity {
         typeSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         type_spinner.setAdapter(typeSpinnerArrayAdapter);
 
+        // Get the element from the pizza type spinner
         final int iCurrentSelection = type_spinner.getSelectedItemPosition();
 
+        // Now get the item if the valud changes
         type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i > 0) {
@@ -77,7 +83,7 @@ public class SelectOptionsActivity extends AppCompatActivity {
 
         });
 
-
+        // Update the amount if chnage
         amount_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i > 0) {
@@ -93,31 +99,34 @@ public class SelectOptionsActivity extends AppCompatActivity {
             }
         });
 
+        // if the starter toggle switch gets changed
         starter_toggle.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if ( starter_toggle.isChecked() ){
-                    using_starter_question.setAlpha(1);
-                }
+            if ( starter_toggle.isChecked() ){
+                using_starter_question.setAlpha(1);
+            }
 
-                else {
-                    using_starter_question.setAlpha(FADED);
-                }
-
+            else {
+                using_starter_question.setAlpha(FADED);
+            }
             }
         });
 
+        // Once all options are ready, send to next activity
         calculate_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                String type = type_spinner.getItemAtPosition(type_spinner.getSelectedItemPosition()).toString();
-                String amount = amount_spinner.getItemAtPosition(amount_spinner.getSelectedItemPosition()).toString();
-                Boolean use_starter = starter_toggle.isChecked();
-                Intent intent = new Intent(view.getContext(), DetailsActivity.class);
-                intent.putExtra("TYPE", type);
-                intent.putExtra("AMOUNT", amount);
-                intent.putExtra("USING_STARTER", use_starter);
-                Log.d("SELECT OPTIONS ACTIVITY", "getting type " + type + " and amount " + amount + " and using a starter? " +  use_starter);
-                startActivity(intent);
+            // Get values from UI elements
+            String type = type_spinner.getItemAtPosition(type_spinner.getSelectedItemPosition()).toString();
+            String amount = amount_spinner.getItemAtPosition(amount_spinner.getSelectedItemPosition()).toString();
+            Boolean use_starter = starter_toggle.isChecked();
 
+            Intent intent = new Intent(view.getContext(), DetailsActivity.class);
+
+            intent.putExtra("TYPE", type);
+            intent.putExtra("AMOUNT", amount);
+            intent.putExtra("USING_STARTER", use_starter);
+
+            startActivity(intent);
             }
         });
     }

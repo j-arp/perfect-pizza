@@ -20,12 +20,10 @@ public class Ratio {
     }
 
     public Double getAdjustedFlour(){
-
         return flour - getStarterFlourAdjustment();
     }
 
     public Double getAdjustedWater(){
-
         return water - getStarterWaterAdjustment();
     }
 
