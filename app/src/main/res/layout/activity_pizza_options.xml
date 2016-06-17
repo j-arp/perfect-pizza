@@ -33,15 +33,16 @@
         android:textColor="@android:color/white"
         android:src="@android:drawable/ic_menu_revert" />
 -->
+
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/continue_to_amount"
-        android:visibility="invisible"
+        android:id="@+id/calculate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:tint="@color/colorPrimaryDark"
+        android:layout_gravity="bottom|center"
         android:layout_margin="@dimen/fab_margin"
         android:textColor="@android:color/white"
-        android:src="@android:drawable/ic_media_ff" />
+        android:visibility="invisible"
+        android:src="@android:drawable/ic_media_play" />
+
 
 </android.support.design.widget.CoordinatorLayout>

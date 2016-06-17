@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -17,8 +18,8 @@ import android.widget.ToggleButton;
 public class SelectOptionsActivity extends AppCompatActivity {
     static Spinner type_spinner = null;
     static Spinner amount_spinner = null;
-    static ToggleButton starter_toggle = null;
-    static Button details_button = null;
+    static Switch starter_toggle = null;
+    static FloatingActionButton calculate_button = null;
     public final static int AMOUNT = 0;
     public final static String TYPE = "";
     public final static String USE_STARTER = "";
@@ -32,9 +33,9 @@ public class SelectOptionsActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        details_button = (Button) this.findViewById(R.id.details_button);
+        calculate_button = (FloatingActionButton) this.findViewById(R.id.calculate);
         amount_spinner = (Spinner) this.findViewById(R.id.pizza_amount_spinner);
-        starter_toggle = (ToggleButton) this.findViewById(R.id.use_a_starter);
+        starter_toggle = (Switch) this.findViewById(R.id.use_a_starter);
 
         type_spinner = (Spinner) this.findViewById(R.id.pizza_type_spinner);
         ArrayAdapter typeSpinnerArrayAdapter = new ArrayAdapter(this,
@@ -73,7 +74,7 @@ public class SelectOptionsActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i > 0) {
                     findViewById(R.id.select_if_using_starter_container).setVisibility(View.VISIBLE);
-                    findViewById(R.id.continue_button_container).setVisibility(View.VISIBLE);
+                    findViewById(R.id.calculate).setVisibility(View.VISIBLE);
                     String amount = amount_spinner.getItemAtPosition(amount_spinner.getSelectedItemPosition()).toString();
                     Log.d("amount selected", "turn amount on" + amount);
 
@@ -91,7 +92,7 @@ public class SelectOptionsActivity extends AppCompatActivity {
             }
         });
 
-        details_button.setOnClickListener(new View.OnClickListener() {
+        calculate_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String type = type_spinner.getItemAtPosition(type_spinner.getSelectedItemPosition()).toString();
                 String amount = amount_spinner.getItemAtPosition(amount_spinner.getSelectedItemPosition()).toString();

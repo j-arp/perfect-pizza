@@ -12,7 +12,7 @@
     <string name="type_question">What type of pizza are you making?</string>
     <string name="title_activity_select_amount">SelectAmountActivity</string>
     <string name="amount_question">How Many Pizzas are you making?</string>
-    <string name="starter_question">Starter for better dough?</string>
+    <string name="starter_question">Use a Starter for better dough.</string>
     <string name="yes_for_starter">Yes. Let\'s use a starter</string>
     <string name="title_activity_details">DetailsActivity</string>
     <string name="water_title">Water</string>

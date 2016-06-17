@@ -65,26 +65,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/select_amount_spinner_container"
-        android:visibility="visible">
+        android:visibility="invisible">
+
         <LinearLayout
             android:layout_marginTop="20pt"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
-           
-            <ToggleButton
-                android:textOff="Don't Use"
-                android:textOn="Use"
-                android:id="@+id/use_a_starter"
-                android:layout_below="@+id/using_starter_question"
+            <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/yes_for_starter"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:textColor="@color/white"
                 android:checked="true"
-                android:minWidth="120dp"/>
+                android:textOff="Don't Use"
+                android:textOn="Use"
+                android:layout_marginRight="20dp"
+                android:id="@+id/use_a_starter"
+                />
+
+            <!--<ToggleButton-->
+                <!--android:textOff="Don't Use"-->
+                <!--android:textOn="Use"-->
+                <!--android:id="@+id/use_a_starter"-->
+                <!--android:layout_below="@+id/using_starter_question"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/yes_for_starter"-->
+                <!--android:backgroundTint="@color/colorPrimaryDark"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:checked="true"-->
+                <!--android:minWidth="120dp"/>-->
 
             <TextView
                 android:id="@+id/using_starter_question"
@@ -97,23 +107,7 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/continue_button_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:visibility="invisible"
-        android:layout_below="@+id/select_if_using_starter_container"
-        >
 
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Get Details"
-        android:id="@+id/details_button"
-
-     />
-    </RelativeLayout>
 
 </RelativeLayout>
+
