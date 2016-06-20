@@ -14,8 +14,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class DetailsActivity extends AppCompatActivity {
     static FloatingActionButton reset_button = null;
+    static TextView starter_flour_data = null;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class DetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         reset_button = (FloatingActionButton) this.findViewById(R.id.reset_button);
+        starter_flour_data = (TextView) this.findViewById(R.id.flour_starter_data);
+
         String type =       intent.getStringExtra("TYPE");
         String amount =       intent.getStringExtra("AMOUNT");
         Boolean use_starter = intent.getBooleanExtra("USING_STARTER", false);
@@ -63,5 +68,14 @@ public class DetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        starter_flour_data.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Log.d("DETAILS", "clicked flour start data!");
+
+            }
+        });
+
+
     }
 }

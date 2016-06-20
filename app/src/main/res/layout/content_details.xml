@@ -76,6 +76,7 @@
 
                     <TextView
                         android:id="@+id/flour_starter_title"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/flour_label"
@@ -87,12 +88,14 @@
 
                     <TextView
                         android:id="@+id/flour_starter_data"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="100"
                         android:textAlignment="center"
                         android:layout_below="@+id/flour_starter_title"
                         android:textSize="@dimen/regular_text"
+                        android:longClickable="true"
                         />
 
                     <!--<EditText-->
