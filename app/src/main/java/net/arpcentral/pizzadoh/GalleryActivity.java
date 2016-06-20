@@ -1,23 +1,26 @@
 package net.arpcentral.pizzadoh;
 
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.S3ObjectSummary;
+import android.util.Log;
 
+import net.arpcentral.pizzadoh.asynctasks.FileFetcher;
+
+import org.apache.commons.io.IOUtils;
+import java.io.IOException;
 import java.util.List;
 
 
 public class GalleryActivity extends AppCompatActivity {
 
 
+    private static final int MY_PERMISSIONS_REQUEST_INTERNET = 404;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,49 +28,39 @@ public class GalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gallery);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //FileFetcher runner = new FileFetcher();
 
-
-
-
-    }
-    final AmazonS3Client s3Client = new AmazonS3Client(new BasicAWSCredentials(Constants.AWS_ID, Constants.AWS_KEY));
-
-    private class GetFileListTask extends AsyncTask<Void, Void, Void> {
-        // The list of objects we find in the S3 bucket
-        private List<S3ObjectSummary> s3ObjList;
-        // A dialog to let the user know we are retrieving the files
-        private ProgressDialog dialog;
-
-        @Override
-        protected void onPreExecute() {
-
-        }
-
-        @Override
-        protected Void doInBackground(Void... inputs) {
-            // Queries files in the bucket from S3.
-            s3ObjList = s3Client.listObjects(Constants.BUCKET_NAME).getObjectSummaries();
-            //log.d("aws", "Aws");
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-
+        if (ContextCompat.checkSelfPermission(GalleryActivity.this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+            Log.d("PERM", "Need to ask permmission");
+            ActivityCompat.requestPermissions(GalleryActivity.this, new String[]{Manifest.permission.INTERNET}, MY_PERMISSIONS_REQUEST_INTERNET);
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        Log.d("PERM", "request code is: " + requestCode);
+        switch (requestCode) {
+
+            case MY_PERMISSIONS_REQUEST_INTERNET: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("PERM", "Granted internet perms");
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
 }
 
 
