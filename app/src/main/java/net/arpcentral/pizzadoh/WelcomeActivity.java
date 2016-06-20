@@ -48,6 +48,11 @@ public class WelcomeActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.action_gallery) {
+            Intent intent = new Intent(this, GalleryActivity.class);
+            startActivity(intent);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }
