@@ -17,28 +17,65 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-
     <RelativeLayout
         android:id="@+id/detail_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
-        <TextView
-            android:id="@+id/info_text"
+        <LinearLayout
+            android:id="@+id/keep_screen_on_toggle_layout"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            >
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="false"
+                android:textOff="Don't Use"
+                android:textOn="Use"
+                android:layout_marginRight="20dp"
+                android:id="@+id/keep_screen_on_toggle"
+                />
+
+            <TextView
+                android:id="@+id/keep_screen_on_toggle_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/keep_screen_on_for_now_text"
+                android:textSize="@dimen/small_text"
+                android:textColor="@color/colorPrimary"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/info_text_layout"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Use these measurements for perfect pizza crusts. All measurments are in grams."
-            android:textSize="@dimen/tiny_text"
-            android:textColor="@color/greyer"
-            android:padding="16dp"
-            android:layout_marginBottom="6dp"/>
+            android:layout_margin="10dp"
+            android:gravity="top">
+
+            <TextView
+                android:id="@+id/info_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Use these measurements for perfect pizza crusts. All measurments are in grams."
+                android:textSize="@dimen/tiny_text"
+                android:textColor="@color/greyer"
+                android:padding="16dp"
+                android:layout_marginLeft="50dp"
+                />
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/starter_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/info_text"
+            android:layout_below="@+id/info_text_layout"
             >
 
         <!-- Starter Card -->
@@ -64,6 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
                 >
 
                 <LinearLayout
@@ -76,19 +114,17 @@
 
                     <TextView
                         android:id="@+id/flour_starter_title"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/flour_label"
                         android:textAlignment="center"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="10dp"
                         android:textSize="@dimen/medium_text"
                         android:textColor="@color/colorAccent"
                         />
 
                     <TextView
                         android:id="@+id/flour_starter_data"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="100"
@@ -98,18 +134,19 @@
                         android:longClickable="true"
                         />
 
-                    <!--<EditText-->
-                        <!--android:id="@+id/flour_starter_data_edit"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="100"-->
-                        <!--android:inputType="number"-->
-                        <!--android:textAlignment="center"-->
-                        <!--android:layout_below="@+id/flour_starter_title"-->
-                        <!--android:textSize="@dimen/regular_text"-->
-                        <!--android:padding="30px"-->
-                        <!--android:visibility="gone"-->
-                        <!--/>-->
+                    <EditText
+                        android:id="@+id/flour_starter_data_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:layout_below="@+id/flour_starter_title"
+                        android:textSize="@dimen/regular_text"
+                        android:visibility="gone"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true"
+                        />
 
 
                 </LinearLayout>
@@ -130,22 +167,23 @@
                         android:text="@string/water_label"
                         android:textColor="@color/colorAccent"
                         android:textSize="@dimen/medium_text"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="10dp"
 
                         />
 
-                    <!--<EditText-->
-                        <!--android:id="@+id/water_starter_data_edit"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="150"-->
-                        <!--android:inputType="number"-->
-                        <!--android:textAlignment="center"-->
-                        <!--android:layout_below="@+id/water_starter_title"-->
-                        <!--android:textSize="@dimen/regular_text"-->
-                        <!--android:padding="30px"-->
-                        <!--android:visibility="invisible"-->
-                        <!--/>-->
+                    <EditText
+                        android:id="@+id/water_starter_data_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="150"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:layout_below="@+id/water_starter_title"
+                        android:textSize="@dimen/regular_text"
+                        android:visibility="gone"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true"
+                        />
 
                     <TextView
                         android:id="@+id/water_starter_data"
@@ -162,8 +200,13 @@
                 </LinearLayout>
 
             </LinearLayout>
+
             </LinearLayout>
+
+
+
         </RelativeLayout>
+
 
         <!-- Flour Card -->
         <RelativeLayout

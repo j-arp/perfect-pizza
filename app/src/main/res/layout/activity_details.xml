@@ -23,6 +23,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_details" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/reset_button"
         android:layout_width="wrap_content"

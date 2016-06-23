@@ -30,5 +30,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="about">About</string>
     <string name="title_activity_about">AboutActivity</string>
+    <string name="keep_screen_on_for_now_text">Keep screen on for now</string>
 
 </resources>
