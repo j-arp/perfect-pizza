@@ -47,6 +47,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         reset_button = (FloatingActionButton) this.findViewById(R.id.reset_button);
         starter_flour_data = (TextView) this.findViewById(R.id.flour_starter_data);
         starter_water_data = (TextView) this.findViewById(R.id.water_starter_data);
@@ -110,21 +112,22 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
-        keep_screen_on_toggle.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-            Log.d("DETAILS", "clicked screen on");
-
-            if ( keep_screen_on_toggle.isChecked() ){
-                keep_screen_on_toggle_question.setAlpha(1);
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
-
-            else {
-                keep_screen_on_toggle_question.setAlpha(FADED);
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
-            }
-        });
+//        keep_screen_on_toggle.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//            boolean handled = false;
+//            if ( keep_screen_on_toggle.isChecked() ){
+//                keep_screen_on_toggle_question.setAlpha(1);
+//                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//                Log.d("DETAILS", "clicked screen on // " + getWindow() );
+//            }
+//
+//            else {
+//                keep_screen_on_toggle_question.setAlpha(FADED);
+//                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//                Log.d("DETAILS", "clear screen off");
+//            }
+//            }
+//        });
 
         water_starter_details_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

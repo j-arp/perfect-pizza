@@ -23,33 +23,33 @@
         android:layout_height="wrap_content"
         >
 
-        <LinearLayout
-            android:id="@+id/keep_screen_on_toggle_layout"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            >
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="false"
-                android:textOff="Don't Use"
-                android:textOn="Use"
-                android:layout_marginRight="20dp"
-                android:id="@+id/keep_screen_on_toggle"
-                />
+        <!--<LinearLayout-->
+            <!--android:id="@+id/keep_screen_on_toggle_layout"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
+            <!--&gt;-->
+            <!--<Switch-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:checked="false"-->
+                <!--android:textOff="Don't Use"-->
+                <!--android:textOn="Use"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:id="@+id/keep_screen_on_toggle"-->
+                <!--/>-->
 
-            <TextView
-                android:id="@+id/keep_screen_on_toggle_question"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/keep_screen_on_for_now_text"
-                android:textSize="@dimen/small_text"
-                android:textColor="@color/colorPrimary"
-                />
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/keep_screen_on_toggle_question"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/keep_screen_on_for_now_text"-->
+                <!--android:textSize="@dimen/small_text"-->
+                <!--android:textColor="@color/colorPrimary"-->
+                <!--/>-->
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:id="@+id/info_text_layout"
@@ -67,7 +67,6 @@
                 android:textSize="@dimen/tiny_text"
                 android:textColor="@color/greyer"
                 android:padding="16dp"
-                android:layout_marginLeft="50dp"
                 />
         </LinearLayout>
 
