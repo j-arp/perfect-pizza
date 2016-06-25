@@ -47,7 +47,7 @@ public class History {
     }
 
     public String toString(){
-        return "#" + Integer.toString(id) + " " + Integer.toString(quantity) + " " + type + " Pizzas with a starter of " + Integer.toString(starter_water) + "g water/" + Integer.toString(starter_flour) + "g flour";
+        return Integer.toString(quantity) + " " + type + " Pizzas with a starter of " + Integer.toString(starter_water) + "g water/" + Integer.toString(starter_flour) + "g flour";
     }
 
     public static boolean contains(History history){
