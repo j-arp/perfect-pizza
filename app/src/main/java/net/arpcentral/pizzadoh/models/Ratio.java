@@ -1,4 +1,4 @@
-package net.arpcentral.pizzadoh;
+package net.arpcentral.pizzadoh.models;
 
 import android.util.Log;
 

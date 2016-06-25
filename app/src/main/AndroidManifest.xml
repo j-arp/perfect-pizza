@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".activities.WelcomeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,31 +22,41 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SelectOptionsActivity"
+            android:name=".activities.SelectOptionsActivity"
             android:label="@string/title_activity_pizza_type"
-            android:parentActivityName=".WelcomeActivity"
+            android:parentActivityName=".activities.WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="net.arpcentral.pizzadoh.WelcomeActivity" />
+                android:value=".activities.WelcomeActivity" />
         </activity>
         <activity
-            android:name=".DetailsActivity"
+            android:name=".activities.DetailsActivity"
             android:label="@string/title_activity_details"
-            android:parentActivityName=".SelectOptionsActivity"
+            android:parentActivityName=".activities.SelectOptionsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="net.arpcentral.pizzadoh.SelectOptionsActivity" />
+                android:value=".activities.SelectOptionsActivity" />
         </activity>
         <activity
-            android:name=".AboutActivity"
+            android:name=".activities.AboutActivity"
             android:label="@string/title_activity_about"
-            android:parentActivityName=".WelcomeActivity"
+            android:parentActivityName=".activities.WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="net.arpcentral.pizzadoh.WelcomeActivity" />
+                android:value=".activities.WelcomeActivity" />
+        </activity>
+        <activity
+            android:name=".HistoryActivity"
+            android:label="@string/title_activity_history"
+            android:parentActivityName=".activities.WelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.arpcentral.pizzadoh.activities.WelcomeActivity" />
         </activity>
     </application>
+
 </manifest>

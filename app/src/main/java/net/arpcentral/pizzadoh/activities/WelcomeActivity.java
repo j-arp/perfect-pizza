@@ -1,14 +1,16 @@
-package net.arpcentral.pizzadoh;
+package net.arpcentral.pizzadoh.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import net.arpcentral.pizzadoh.HistoryActivity;
+import net.arpcentral.pizzadoh.R;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -44,6 +46,14 @@ public class WelcomeActivity extends AppCompatActivity {
         // if the menu item clicked is "About", fire off that activity
         if (id == R.id.action_about) {
             Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+
+        // if the menu item clicked is "About", fire off that activity
+        if (id == R.id.action_history) {
+            Intent intent = new Intent(this, HistoryActivity.class);
             startActivity(intent);
             return true;
         }

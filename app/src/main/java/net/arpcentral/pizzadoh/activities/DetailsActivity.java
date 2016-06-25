@@ -1,37 +1,40 @@
-package net.arpcentral.pizzadoh;
+package net.arpcentral.pizzadoh.activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.ToggleButton;
+
+import net.arpcentral.pizzadoh.R;
+import net.arpcentral.pizzadoh.models.History;
+import net.arpcentral.pizzadoh.models.Ratio;
 
 public class DetailsActivity extends AppCompatActivity {
 
     final Integer DEFAULT_WATER = 150;
     final Integer DEFAULT_FLOUR = 100;
+    public final static Float FADED = new Float(.4);
+
     static FloatingActionButton reset_button = null;
+
     static Switch keep_screen_on_toggle = null;
+    static TextView keep_screen_on_toggle_question = null;
+
     static TextView starter_flour_data = null;
     static TextView starter_water_data = null;
     static EditText flour_starter_details_edit = null;
     static EditText water_starter_details_edit = null;
-    static TextView keep_screen_on_toggle_question = null;
-    public final static Float FADED = new Float(.4);
-
 
     @Override
 
@@ -40,7 +43,6 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Secret To Your Perfect Crust");
@@ -52,13 +54,28 @@ public class DetailsActivity extends AppCompatActivity {
         reset_button = (FloatingActionButton) this.findViewById(R.id.reset_button);
         starter_flour_data = (TextView) this.findViewById(R.id.flour_starter_data);
         starter_water_data = (TextView) this.findViewById(R.id.water_starter_data);
-        keep_screen_on_toggle = (Switch) this.findViewById(R.id.keep_screen_on_toggle);
-        keep_screen_on_toggle_question = (TextView) this.findViewById(R.id.keep_screen_on_toggle_question);
+//        keep_screen_on_toggle = (Switch) this.findViewById(R.id.keep_screen_on_toggle);
+//        keep_screen_on_toggle_question = (TextView) this.findViewById(R.id.keep_screen_on_toggle_question);
 
-        String type =       intent.getStringExtra("TYPE");
-        String amount =       intent.getStringExtra("AMOUNT");
-        Boolean use_starter = intent.getBooleanExtra("USING_STARTER", false);
+        String type =           intent.getStringExtra("TYPE");
+        String amount =         intent.getStringExtra("AMOUNT");
+        Boolean use_starter =   intent.getBooleanExtra("USING_STARTER", false);
+
+        int starting_water = DEFAULT_WATER;
+        int starting_flour = DEFAULT_FLOUR;
+        String starting_water_text = Integer.toString(DEFAULT_WATER);
+        String starting_flour_text = Integer.toString(DEFAULT_FLOUR);
+
+        if ( intent.hasExtra("STARTING_WATER") ){
+            starting_water = Integer.parseInt(intent.getStringExtra("STARTING_WATER"));
+            starting_flour = Integer.parseInt(intent.getStringExtra("STARTING_FLOUR"));
+            starting_water_text = intent.getStringExtra("STARTING_WATER");
+            starting_flour_text = intent.getStringExtra("STARTING_FLOUR");
+        }
+
+
         Ratio ratio = new Ratio(type, Integer.parseInt(amount), use_starter);
+
         final TextView flour_starter_details = (TextView)findViewById(R.id.flour_starter_data);
         final TextView water_starter_details = (TextView)findViewById(R.id.water_starter_data);
 
@@ -69,16 +86,25 @@ public class DetailsActivity extends AppCompatActivity {
         final TextView flour_details = (TextView)findViewById(R.id.flour_details_data);
         final TextView water_details = (TextView)findViewById(R.id.water_details_data);
 
-        keep_screen_on_toggle_question.setAlpha(FADED);
+        final History history = new History(0, "", starting_water, starting_flour, this);
+        history.type = type;
+        history.quantity = Integer.parseInt(amount);
+        history.save();
+
+        //keep_screen_on_toggle_question.setAlpha(FADED);
 
         // If Using a starter is checked
         if (use_starter){
-            flour_starter_details.setText(DEFAULT_FLOUR.toString());
-            water_starter_details.setText(DEFAULT_WATER.toString());
+            flour_starter_details.setText(starting_flour_text);
+            water_starter_details.setText(starting_water_text);
+            history.starter_water = starting_water;
+            history.starter_flour = starting_flour;
         }
 
         else {
             starter_container.setVisibility(View.GONE);
+            history.starter_water = 0;
+            history.starter_flour = 0;
         }
 
         final int adjusted_flour = (int) Math.round(ratio.getAdjustedFlour());
@@ -86,6 +112,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         flour_details.setText(Integer.toString(adjusted_flour));
         water_details.setText(Integer.toString(adjusted_water));
+
+
 
         reset_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -133,15 +161,16 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
-                Log.d("EDIT", "action id is " + actionId);
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    Log.d("EDIT", "editing to value " + v.getText());
+                    Log.d("EDIT", "editing to value for water " + v.getText());
                     int more_adjustment = DEFAULT_WATER - Integer.parseInt(v.getText().toString());
                     water_details.setText(Integer.toString(adjusted_water + more_adjustment));
                     water_starter_details.setText(v.getText().toString());
                     water_starter_details.setVisibility(View.VISIBLE);
                     water_starter_details_edit.setVisibility(View.GONE);
+                    history.starter_water = Integer.parseInt(v.getText().toString());
                     hide_keyboard(flour_starter_details_edit);
+                    History.replaceLast(history);
                     handled = true;
                 }
                 return handled;
@@ -153,14 +182,15 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
-                Log.d("EDIT", "action id is " + actionId);
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    Log.d("EDIT", "editing to value " + v.getText());
+                    Log.d("EDIT", "editing to value for flour " + v.getText());
                     int more_adjustment = DEFAULT_FLOUR - Integer.parseInt(v.getText().toString());
                     flour_details.setText(Integer.toString(adjusted_flour + more_adjustment));
                     flour_starter_details.setText(v.getText().toString());
                     flour_starter_details.setVisibility(View.VISIBLE);
                     flour_starter_details_edit.setVisibility(View.GONE);
+                    history.starter_flour = Integer.parseInt(v.getText().toString());
+                    History.replaceLast(history);
                     hide_keyboard(flour_starter_details_edit);
                     handled = true;
                 }
@@ -175,4 +205,9 @@ public class DetailsActivity extends AppCompatActivity {
         imm.hideSoftInputFromWindow(source.getWindowToken(), 0);
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

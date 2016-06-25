@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/no_margin"
     android:paddingTop="@dimen/no_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="net.arpcentral.pizzadoh.WelcomeActivity"
+    tools:context=".activities.WelcomeActivity"
     tools:showIn="@layout/activity_welcome"
     android:clipToPadding="false">
 

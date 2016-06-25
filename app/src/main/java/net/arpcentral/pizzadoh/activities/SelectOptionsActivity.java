@@ -1,20 +1,20 @@
-package net.arpcentral.pizzadoh;
+package net.arpcentral.pizzadoh.activities;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.ToggleButton;
+
+import net.arpcentral.pizzadoh.R;
+import net.arpcentral.pizzadoh.activities.DetailsActivity;
+import net.arpcentral.pizzadoh.models.PizzaType;
 
 
 public class SelectOptionsActivity extends AppCompatActivity {
@@ -57,7 +57,7 @@ public class SelectOptionsActivity extends AppCompatActivity {
         });
 
         // Array Adapter for Amount Spinner
-        Integer[] amounts = new Integer[]{0, 2, 4, 6, 8, 10, 12};
+        Integer[] amounts = new Integer[]{0, 2, 4, 6, 8, 10, 12, 14, 16};
         ArrayAdapter<Integer> amountSpinnerArrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, amounts);
         amountSpinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         amount_spinner.setAdapter(amountSpinnerArrayAdapter);

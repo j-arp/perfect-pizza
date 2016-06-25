@@ -1,4 +1,4 @@
-package net.arpcentral.pizzadoh;
+package net.arpcentral.pizzadoh.models;
 
 public class PizzaType {
     public int id = 0;
