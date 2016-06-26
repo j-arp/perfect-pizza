@@ -15,29 +15,32 @@ import java.util.Set;
 public class History {
 
     public static final String PREFS_NAME = "history";
+    public int id = 1;
+    public Amount quantity; // = new Amount(0);
+    public String type; // = "";
+    public Amount starter_water; // = new Amount(0);
+    public Amount starter_flour; // = new Amount(0);
+
     public Context context;
     public SharedPreferences settings;
     private SharedPreferences.Editor editor;
-    public int id = 1;
-    public int quantity = 0;
-    public String type = "";
-    public int starter_water = 0;
-    public int starter_flour = 0;
 
+    /****** Constructor *************************/
     public History(int _quantity, String _type, int _starter_water, int _starter_flour, Context _context){
-        // Log.d("HISTORY CONTSRUCT", "quant: " + _quantity + " type: " + _type + " water: " + _starter_water + " flour: " + _starter_flour );
-        quantity = _quantity;
+        System.out.println("HISTORY CONTSRUCT// quant: " + _quantity + " type: " + _type + " water: " + _starter_water + " flour: " + _starter_flour );
+        quantity = new Amount(_quantity);
         type = _type;
-        starter_flour = _starter_flour;
-        starter_water = _starter_water;
+        starter_flour = new Amount(_starter_flour);
+        starter_water = new Amount(_starter_water);
 
         context = _context;
         settings = context.getSharedPreferences(PREFS_NAME, 0);
         editor = settings.edit();
     }
 
+    /****** Using a starter *************************/
     public boolean using_starter(){
-        if ( starter_water == 0 || starter_flour == 0 ){
+        if ( starter_water.toInteger() == 0 || starter_flour.toInteger() == 0 ){
             return false;
         }
 
@@ -46,10 +49,12 @@ public class History {
         }
     }
 
+    /****** To String *************************/
     public String toString(){
-        return Integer.toString(quantity) + " " + type + " Pizzas with a starter of " + Integer.toString(starter_water) + "g water/" + Integer.toString(starter_flour) + "g flour";
+        return quantity.toString() + " " + type + " Pizzas with a starter of " + starter_water.toString() + "g water/" + starter_flour.toString() + "g flour";
     }
 
+    /****** Contains *************************/
     public static boolean contains(History history){
 
         boolean result = false;
@@ -65,24 +70,35 @@ public class History {
         }
         return result;
     }
-
-
+    /****** to Delimited *************************/
     public String toDelimited(){
-        // Log.d("HISTORY", "#toDelimited");
-        return Integer.toString(id) + ":" + Integer.toString(quantity) + ":" + type + ":" + Integer.toString(starter_water) + ":" + Integer.toString(starter_flour);
+        System.out.println("to deliited with " + quantity);
+        return Integer.toString(id)
+                + ":"
+               + quantity.toString()
+                + ":"
+                + type
+                + ":"
+                + starter_water.toString()
+                + ":"
+                + starter_flour.toString();
     }
 
+    /****** to delimited with override  *************************/
     public String toDelimited(boolean with_id){
-        // Log.d("HISTORY", "#toDelimited");
+        Log.d("HISTORY", "#toDelimited: " + quantity.toString());
+        Log.d("HISTORY", "#toDelimited: " + starter_water.toString());
+        Log.d("HISTORY", "#toDelimited: " + starter_flour.toString());
+
         if ( with_id ){
-            return Integer.toString(quantity) + ":" + type + ":" + Integer.toString(starter_water) + ":" + Integer.toString(starter_flour);
+            return toDelimited();
         }
 
         else{
-            return toDelimited();
+            return quantity.toString() + ":" + type + ":" + starter_water.toString() + ":" + starter_flour.toString();
         }
     }
-
+    /****** Save *************************/
     public void save() {
 
         Set<String> stored_history = settings.getStringSet("history", null);
@@ -92,7 +108,7 @@ public class History {
         }
 
         id = stored_history.isEmpty() ? 1 : stored_history.size();
-        Log.d("HISTORY#save", "is " + toDelimited(true) + " found in " + History.fetch(context) + " / answer is " + History.contains(this));
+        Log.d("HISTORY#save", "is " + toDelimited(false) + " found in " + History.fetch(context) + " / answer is " + History.contains(this));
 
         if (!History.contains(this)){
             Log.d("HISTORY#save", "NEW history // Not Found: " + toDelimited());
@@ -145,8 +161,11 @@ public class History {
 
             for (String temp : stored_history) {
                 String attrs[] = temp.split(":");
-                // Log.d("HIST ARGS", "quant: " + attrs[1]);
-                // Log.d("HIST ARGS", "type: " + attrs[2]);
+                Log.d("HIST ARGS", "demlitmited: " + temp);
+                Log.d("HIST ARGS", "quant: " + attrs[1]);
+                Log.d("HIST ARGS", "type: " + attrs[2]);
+                Log.d("HIST ARGS", "water: " + attrs[3]);
+                Log.d("HIST ARGS", "flour: " + attrs[4]);
                 History history = new History(Integer.parseInt(attrs[1]), attrs[2], Integer.parseInt(attrs[3]), Integer.parseInt(attrs[4]), _context);
                 history.id = Integer.parseInt(attrs[0]);
                 all.add(history);
@@ -161,5 +180,40 @@ public class History {
 
         return all;
 
+    }
+
+
+    public void setQuantity(int q){
+        quantity = new Amount(q);
+    }
+
+    public void setStarterWater(int q){
+        Log.d("HISTORY" , "set water starter with  " +  q);
+        starter_water = new Amount(q);
+    }
+
+    public void setStarterFlour(int q){
+        Log.d("HISTORY" , "set flour starter with  " +  q);
+        starter_flour = new Amount(q);
+    }
+
+    public void setQuantity(String q){
+        Log.d("HISTORY" , "set quantity with  " +  q);
+        quantity = new Amount(q);
+    }
+
+    public void setStarterWater(String q){
+        Log.d("HISTORY" , "set water starter with  " +  q);
+        starter_water = new Amount(q);
+    }
+
+    public void setStarterFlour(String q){
+        Log.d("HISTORY" , "set flour starter with  " +  q);
+        starter_flour = new Amount(q);
+    }
+
+    public void setType(String t){
+        Log.d("HISTORY" , "set type starter with  " +  t);
+        type = t;
     }
 }
