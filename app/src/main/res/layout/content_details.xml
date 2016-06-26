@@ -23,51 +23,35 @@
         android:layout_height="wrap_content"
         >
 
-        <!--<LinearLayout-->
-            <!--android:id="@+id/keep_screen_on_toggle_layout"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
-            <!--&gt;-->
-            <!--<Switch-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:checked="false"-->
-                <!--android:textOff="Don't Use"-->
-                <!--android:textOn="Use"-->
-                <!--android:layout_marginRight="20dp"-->
-                <!--android:id="@+id/keep_screen_on_toggle"-->
-                <!--/>-->
-
-            <!--<TextView-->
-                <!--android:id="@+id/keep_screen_on_toggle_question"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="@string/keep_screen_on_for_now_text"-->
-                <!--android:textSize="@dimen/small_text"-->
-                <!--android:textColor="@color/colorPrimary"-->
-                <!--/>-->
-        <!--</LinearLayout>-->
-
         <LinearLayout
             android:id="@+id/info_text_layout"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="top">
 
             <TextView
+                android:id="@+id/info_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4 New York Pizzas"
+                android:textSize="@dimen/medium_text"
+                android:textColor="@color/colorPrimaryDark"
+                android:padding="0dp"
+                android:textStyle="bold"
+                android:textAlignment="center" />
+
+            <TextView
                 android:id="@+id/info_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Use these measurements for perfect pizza crusts. All measurments are in grams."
+                android:text="@string/details_info_caption"
                 android:textSize="@dimen/tiny_text"
                 android:textColor="@color/greyer"
-                android:padding="16dp"
+                android:padding="0dp"
                 />
+
         </LinearLayout>
 
         <RelativeLayout
@@ -91,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Starter"
-                android:textSize="@dimen/large_text"
+                android:textSize="@dimen/medium_text"
                 android:textColor="@color/colorPrimaryDark"
                 />
 
@@ -118,7 +102,7 @@
                         android:text="@string/flour_label"
                         android:textAlignment="center"
                         android:layout_marginRight="10dp"
-                        android:textSize="@dimen/medium_text"
+                        android:textSize="@dimen/regular_text"
                         android:textColor="@color/colorAccent"
                         />
 
@@ -165,7 +149,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/water_label"
                         android:textColor="@color/colorAccent"
-                        android:textSize="@dimen/medium_text"
+                        android:textSize="@dimen/regular_text"
                         android:layout_marginRight="10dp"
 
                         />
@@ -226,7 +210,8 @@
                 android:fadingEdgeLength="20dp"
                 android:alpha=".6"
                 android:fadingEdge="horizontal|vertical"
-                android:layout_marginBottom="20dp" />
+                android:layout_marginBottom="20dp"
+                android:contentDescription="flour and spoon" />
 
             <LinearLayout
                 android:id="@+id/flour_details_container"
@@ -234,7 +219,8 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                android:backgroundTint="#cc0000">
+                android:backgroundTint="#cc0000"
+                android:paddingTop="0dp">
 
                 <TextView
                     android:id="@+id/flour_details_title"
