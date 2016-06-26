@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -16,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import net.arpcentral.pizzadoh.HistoryActivity;
 import net.arpcentral.pizzadoh.R;
 import net.arpcentral.pizzadoh.models.History;
 import net.arpcentral.pizzadoh.models.Ratio;
@@ -79,6 +82,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         Ratio ratio = new Ratio(type, Integer.parseInt(amount), use_starter);
 
+        final TextView info_title = (TextView)findViewById(R.id.info_title);
+
         final TextView flour_starter_details = (TextView)findViewById(R.id.flour_starter_data);
         final TextView water_starter_details = (TextView)findViewById(R.id.water_starter_data);
 
@@ -113,6 +118,7 @@ public class DetailsActivity extends AppCompatActivity {
         final int adjusted_flour = (int) Math.round(ratio.getAdjustedFlour());
         final int adjusted_water = (int) Math.round(ratio.getAdjustedWater());
 
+        info_title.setText(amount + " " + type + " Pizzas");
         flour_details.setText(Integer.toString(adjusted_flour));
         water_details.setText(Integer.toString(adjusted_water));
 
@@ -208,6 +214,35 @@ public class DetailsActivity extends AppCompatActivity {
         imm.hideSoftInputFromWindow(source.getWindowToken(), 0);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is pres ent.
+        getMenuInflater().inflate(R.menu.menu_welcome, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        // if the menu item clicked is "About", fire off that activity
+        if (id == R.id.action_about) {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+
+        // if the menu item clicked is "About", fire off that activity
+        if (id == R.id.action_history) {
+            Intent intent = new Intent(this, HistoryActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onDestroy() {
