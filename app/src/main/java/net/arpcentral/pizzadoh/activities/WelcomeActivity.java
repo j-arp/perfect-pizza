@@ -15,10 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import net.arpcentral.pizzadoh.HistoryActivity;
 import net.arpcentral.pizzadoh.R;
-
-import java.util.ArrayList;
 
 public class WelcomeActivity extends AppCompatActivity {
     private String[] nav_items;
@@ -100,7 +97,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
             if (id == 1) {
                 Intent intent = new Intent(WelcomeActivity.this, HistoryActivity.class);
+                startActivity(intent);
+            }
 
+            if (id == 2) {
+                Intent intent = new Intent(WelcomeActivity.this, ResourcesActivity.class);
                 startActivity(intent);
             }
 

@@ -18,7 +18,6 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import net.arpcentral.pizzadoh.HistoryActivity;
 import net.arpcentral.pizzadoh.R;
 import net.arpcentral.pizzadoh.models.History;
 import net.arpcentral.pizzadoh.models.Ratio;

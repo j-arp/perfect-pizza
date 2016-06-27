@@ -1,4 +1,4 @@
-package net.arpcentral.pizzadoh;
+package net.arpcentral.pizzadoh.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import net.arpcentral.pizzadoh.R;
 import net.arpcentral.pizzadoh.activities.DetailsActivity;
 import net.arpcentral.pizzadoh.activities.WelcomeActivity;
 import net.arpcentral.pizzadoh.models.History;

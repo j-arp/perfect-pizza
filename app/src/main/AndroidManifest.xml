@@ -49,8 +49,17 @@
                 android:value=".activities.WelcomeActivity" />
         </activity>
         <activity
-            android:name=".HistoryActivity"
+            android:name=".activities.HistoryActivity"
             android:label="@string/title_activity_history"
+            android:parentActivityName=".activities.WelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.arpcentral.pizzadoh.activities.WelcomeActivity" />
+        </activity>
+        <activity
+            android:name=".activities.ResourcesActivity"
+            android:label="@string/title_activity_recources"
             android:parentActivityName=".activities.WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
