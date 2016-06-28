@@ -18,13 +18,8 @@ import android.widget.ListView;
 import net.arpcentral.pizzadoh.R;
 
 public class WelcomeActivity extends AppCompatActivity {
-    private String[] nav_items;
-    private ListView mDrawerList;
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mDrawerToggle;
 
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,28 +27,37 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Perfect Pizza Forever");
+
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setTitle("Perfect Pizza Forever");
+        }
 
         FloatingActionButton start_button = (FloatingActionButton) findViewById(R.id.start);
-        start_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), SelectOptionsActivity.class));
-            }
-        });
-        nav_items = getResources().getStringArray(R.array.nav_items);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        ArrayAdapter nav_adapter = new ArrayAdapter(this, R.layout.drawer_list_item, R.id.drawer_list_item_text, nav_items);
+        if (start_button != null){
+            start_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(view.getContext(), SelectOptionsActivity.class));
+                }
+            });
+        }
+
+        String[]nav_items = getResources().getStringArray(R.array.nav_items);
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ListView mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        ArrayAdapter nav_adapter;
+        nav_adapter = new ArrayAdapter(this, R.layout.drawer_list_item, R.id.drawer_list_item_text, nav_items);
         // Set the adapter for the list view
-        mDrawerList.setAdapter(nav_adapter);
+        if (mDrawerList != null) {
+            mDrawerList.setAdapter(nav_adapter);
+        }
+
         // Set the list's click listener
-
-
-
-        mTitle = mDrawerTitle = getTitle();
+        CharSequence mDrawerTitle = getTitle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        if (mDrawerList != null) {
+            mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        }
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
 
             /** Called when a drawer has settled in a completely closed state. */
@@ -71,16 +75,9 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         };
 
-        mDrawerLayout.addDrawerListener(mDrawerToggle);
-
-        // Set the drawer toggle as the DrawerListener
-
-
-
-
-
-
-
+        if (mDrawerLayout != null) {
+            mDrawerLayout.addDrawerListener(mDrawerToggle);
+        }
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -92,7 +89,6 @@ public class WelcomeActivity extends AppCompatActivity {
             if (id == 0) {
                 Intent intent = new Intent(WelcomeActivity.this, AboutActivity.class);
                 startActivity(intent);
-
             }
 
             if (id == 1) {
@@ -128,20 +124,20 @@ public class WelcomeActivity extends AppCompatActivity {
         Log.d("WELCOME ACT", "Clicked Item menu " + item);
         int id = item.getItemId();
 
-        // if the menu item clicked is "About", fire off that activity
-        if (id == R.id.action_about) {
-            Intent intent = new Intent(this, AboutActivity.class);
-            startActivity(intent);
-            return true;
-        }
-
-
-        // if the menu item clicked is "About", fire off that activity
-        if (id == R.id.action_history) {
-            Intent intent = new Intent(this, HistoryActivity.class);
-            startActivity(intent);
-            return true;
-        }
+//        // if the menu item clicked is "About", fire off that activity
+//        if (id == R.id.action_about) {
+//            Intent intent = new Intent(this, AboutActivity.class);
+//            startActivity(intent);
+//            return true;
+//        }
+//
+//
+//        // if the menu item clicked is "About", fire off that activity
+//        if (id == R.id.action_history) {
+//            Intent intent = new Intent(this, HistoryActivity.class);
+//            startActivity(intent);
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

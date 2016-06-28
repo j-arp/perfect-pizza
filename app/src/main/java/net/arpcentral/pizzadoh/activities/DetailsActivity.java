@@ -222,20 +222,20 @@ public class DetailsActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        // if the menu item clicked is "About", fire off that activity
-        if (id == R.id.action_about) {
-            Intent intent = new Intent(this, AboutActivity.class);
-            startActivity(intent);
-            return true;
-        }
-
-
-        // if the menu item clicked is "About", fire off that activity
-        if (id == R.id.action_history) {
-            Intent intent = new Intent(this, HistoryActivity.class);
-            startActivity(intent);
-            return true;
-        }
+//        // if the menu item clicked is "About", fire off that activity
+//        if (id == R.id.action_about) {
+//            Intent intent = new Intent(this, AboutActivity.class);
+//            startActivity(intent);
+//            return true;
+//        }
+//
+//
+//        // if the menu item clicked is "About", fire off that activity
+//        if (id == R.id.action_history) {
+//            Intent intent = new Intent(this, HistoryActivity.class);
+//            startActivity(intent);
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

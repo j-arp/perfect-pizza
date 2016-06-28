@@ -149,6 +149,7 @@ public class ResourcesActivity extends AppCompatActivity {
         private static final String ARG_RESOURCE_IMG = "??????";
         private static final String ARG_RESOURCE_URL = "www.somthing.com";
         private static final String ARG_RESOURCE_CATEGORY = "Weapons";
+        private static final String ARG_RESOURCE_ACTION = "FIRE";
 
 
         public PlaceholderFragment() {
@@ -165,6 +166,7 @@ public class ResourcesActivity extends AppCompatActivity {
             args.putString(ARG_RESOURCE_CAPTION, item.getCaption());
             args.putString(ARG_RESOURCE_URL, item.getUrl());
             args.putString(ARG_RESOURCE_IMG, item.getImg());
+            args.putString(ARG_RESOURCE_ACTION, item.getAction());
             args.putString(ARG_RESOURCE_CATEGORY, item.getCategory());
             fragment.setArguments(args);
             return fragment;
@@ -181,11 +183,19 @@ public class ResourcesActivity extends AppCompatActivity {
             captionTextView.setText(getArguments().getString(ARG_RESOURCE_CAPTION));
 
             Button urlButton = (Button) rootView.findViewById(R.id.resouce_url);
-            urlButton.setContentDescription(getArguments().getString(ARG_RESOURCE_URL)  );
+            urlButton.setContentDescription(getArguments().getString(ARG_RESOURCE_URL));
+            urlButton.setText(getArguments().getString(ARG_RESOURCE_ACTION));
+
 
             ImageView resource_image = (ImageView) rootView.findViewById(R.id.resource_img);
             int img_id = getResources().getIdentifier(getArguments().getString(ARG_RESOURCE_IMG), "drawable", getContext().getPackageName() ); //"net.arpcentral.pizzadoh"
-            resource_image.setImageResource(img_id);
+            if (img_id != 0){
+                resource_image.setImageResource(img_id);
+            }
+
+            else{
+                resource_image.setVisibility(View.GONE);
+            }
 
             this.getActivity().setTitle(getArguments().getString(ARG_RESOURCE_CATEGORY));
 
@@ -231,7 +241,8 @@ public class ResourcesActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return ExternalResource.keys()[position];
+            ExternalResource exres = new ExternalResource(readJsonData());
+            return exres.resource_keys().get(position);
         }
     }
 

@@ -1,12 +1,4 @@
 {
-  "Equipment" :
-  [
-    {
-      "name" : "Kitchen Scale",
-      "caption" : "A good quality scale is one of the most important aspects of making perfect dough. Being able to measure down to the gram is key. Don't overlook this important tool in the kitchen.",
-      "url": "https://www.amazon.com/Ozeri-Professional-Digital-Tempered-18-Pound/dp/B006N0OIIG/ref=sr_1_3?s=home-garden&ie=UTF8&qid=1467032390&sr=1-3-spons&keywords=kitchen+scale&psc=1",
-      "img": "scale"}
-  ],
 
   "Ingredients":
   [
@@ -14,11 +6,38 @@
       "name" : "Antimo Caputo Chef's 00 Flour",
       "caption" : "This is very high quality flour. Perfect for when you want to make thin crust pizza.",
       "url": "https://www.amazon.com/Antimo-Caputo-Chefs-00-Flour/dp/B001TZJ3VC?ie=UTF8&*Version*=1&*entries*=0",
+      "action": "Find on Amazon",
       "img": "caputo"},
     {
       "name" : "King Arthur Flour",
       "caption" : "Why not spend a few extra dollars at the gorcery store to get flour that will make your crusts really great! This brand is most likely sitting there in your local gorcery store. Make sure it's bread flour. If you can find it locally, just order it online.",
       "url": "https://www.amazon.com/King-Arthur-Flour-Unbleached-Bread/dp/B00P6EQW6G/ref=sr_1_2_s_it?ie=UTF8&qid=1467032737&sr=1-2&keywords=king+arthur+flour",
+      "action": "Find on Amazon",
       "img": "arthur"}
+  ]
+,
+  "Recipies": [
+    {
+      "name" : "Thai Pizza",
+      "caption" : "A unique take on the pizza. Try this one our for a spicy and savory treat",
+      "url": "http://www.food.com/recipe/california-pizza-kitchen-thai-chicken-pizza-62778",
+      "action": "Get the Recipie Now",
+      "img": ""}
+  ],
+  "Equipment" :
+  [
+    {
+      "name" : "Kitchen Scale",
+      "caption" : "A good quality scale is one of the most important aspects of making perfect dough. Being able to measure down to the gram is key. Don't overlook this important tool in the kitchen.",
+      "url": "https://www.amazon.com/Ozeri-Professional-Digital-Tempered-18-Pound/dp/B006N0OIIG/ref=sr_1_3?s=home-garden&ie=UTF8&qid=1467032390&sr=1-3-spons&keywords=kitchen+scale&psc=1",
+      "action": "Find on Amazon",
+      "img": "scale"},
+
+    {
+      "name" : "Pizza Stone",
+      "caption" : "Once you've made your perfect pizza dough, you will want to use a pizza stone to cook your pizza. It will create a delicious crunchy-chewy pizza crust.",
+      "url": "https://www.amazon.com/Old-Stone-Oven-Rectangular-Pizza/dp/B0000E1FDA",
+      "action": "Find on Amazon",
+      "img": "stone"}
   ]
 }

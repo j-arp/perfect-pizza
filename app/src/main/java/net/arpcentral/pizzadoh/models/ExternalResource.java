@@ -1,19 +1,23 @@
 package net.arpcentral.pizzadoh.models;
 
 import android.content.ClipData;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 /**
  * Created by jarp on 6/27/16.
  */
 public class ExternalResource {
-    final static String[] KEYS = {"Equipment", "Ingredients"};
+
     JSONObject json;
+
     public ExternalResource(String json_string){
 
         try {
@@ -24,32 +28,35 @@ public class ExternalResource {
         }
     }
 
-    public static String[] keys(){
-        return KEYS;
+    public ArrayList<String> resource_keys(){
+        ArrayList<String> keys = new ArrayList<String>();
+        Iterator resource_keys = json.keys();
+        Log.d("EXRES", "getting list of keys. there should be " + json.keys().toString());
+        while (resource_keys.hasNext() ){
+            keys.add(resource_keys.next().toString());
+        }
+        return keys;
     }
 
     public ArrayList<Item> getAll(){
-        try{
-        //String raw_json = json.getString("Equipment");
+
         ArrayList<Item> items =  new ArrayList<Item>();
+        try{
 
-        JSONArray json_items = json.getJSONArray("Equipment");
-        for (int i = 0 ; i < json_items.length(); i++) {
-            JSONObject this_item = json_items.getJSONObject(i);
-            items.add(new Item(this_item, "Equipment"));
+        for( String key:resource_keys()){
+            Log.d("XRES", "getting all items for key of " + key);
+            JSONArray json_items = json.getJSONArray(key);
+            for (int i = 0 ; i < json_items.length(); i++) {
+                JSONObject this_item = json_items.getJSONObject(i);
+                items.add(new Item(this_item, key));
+            }
         }
-        json_items = json.getJSONArray("Ingredients");
-        for (int i = 0 ; i < json_items.length(); i++) {
-            JSONObject this_item = json_items.getJSONObject(i);
-            items.add(new Item(this_item, "Ingredients"));
-        }
-
-        return items;
 
     } catch (Exception e) {
         e.printStackTrace();
-        return new ArrayList<Item>();
+
     }
+        return items;
     }
 
     public ArrayList<Item> getByKey(String key){
@@ -77,6 +84,7 @@ public class ExternalResource {
         String caption;
         String url;
         String img;
+        String action;
         String category;
 
 //        public Item(String _name, String _caption, String _url, String _img){
@@ -92,6 +100,7 @@ public class ExternalResource {
                 caption = json.getString("caption");
                 url = json.getString("url");
                 img = json.getString("img");
+                action = json.getString("action");
                 category = _category;
             }
             catch (Exception e) {
@@ -111,10 +120,8 @@ public class ExternalResource {
             return caption;
         }
 
-        public String getUrl(){
-
-            return url;
-        }
+        public String getUrl(){return url;}
+        public String getAction(){return action;}
 
         public String getImg(){
             return img;
