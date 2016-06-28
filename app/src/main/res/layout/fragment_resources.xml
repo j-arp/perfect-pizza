@@ -27,6 +27,7 @@
             android:id="@+id/resource_img"
             android:layout_gravity="start"
             android:layout_weight="1"
+            android:src="@drawable/arthur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/grey"
@@ -53,12 +54,14 @@
 
         <Button
             android:id="@+id/resouce_url"
+            android:contentDescription="https://www.amazon.com"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Get it on amazon now!"
             android:backgroundTint="@color/colorPrimaryDark"
             android:textColor="#fff"
-
+            android:clickable="true"
+            android:onClick="goToUrl"
             android:layout_marginTop="20dp" />
     </LinearLayout>
 

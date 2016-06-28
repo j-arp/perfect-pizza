@@ -2,6 +2,8 @@ package net.arpcentral.pizzadoh.activities;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -80,8 +82,18 @@ public class ResourcesActivity extends AppCompatActivity {
             }
         });
 
+
+
+
     }
 
+
+    public void goToUrl (View view) {
+        Log.d("RESOURCE ACT", "going to url aand view is " + view.getContentDescription());
+        Uri uriUrl = Uri.parse(view.getContentDescription().toString());
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(launchBrowser);
+    }
 
 
     private String readJsonData() {
@@ -169,9 +181,11 @@ public class ResourcesActivity extends AppCompatActivity {
             captionTextView.setText(getArguments().getString(ARG_RESOURCE_CAPTION));
 
             Button urlButton = (Button) rootView.findViewById(R.id.resouce_url);
+            urlButton.setContentDescription(getArguments().getString(ARG_RESOURCE_URL)  );
 
             ImageView resource_image = (ImageView) rootView.findViewById(R.id.resource_img);
-            resource_image.setImageDrawable(image_from_url(getArguments().getString(ARG_RESOURCE_IMG)));
+            int img_id = getResources().getIdentifier(getArguments().getString(ARG_RESOURCE_IMG), "drawable", getContext().getPackageName() ); //"net.arpcentral.pizzadoh"
+            resource_image.setImageResource(img_id);
 
             this.getActivity().setTitle(getArguments().getString(ARG_RESOURCE_CATEGORY));
 
@@ -179,20 +193,8 @@ public class ResourcesActivity extends AppCompatActivity {
         }
     }
 
-    public static Drawable image_from_url(String url) {
-        Log.d("IMAGE", "getting image from " + url);
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");
-            Log.d("IMAGE", "returning d " + d);
-            return d;
-        } catch (Exception e) {
-            Log.d("IMAGE", "Failed!" + e.toString());
-            return null;
-        }
-    }
-
     /**
+     *
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
@@ -232,4 +234,29 @@ public class ResourcesActivity extends AppCompatActivity {
             return ExternalResource.keys()[position];
         }
     }
+
+
+    class getImageTask extends AsyncTask<String, Void, Drawable> {
+
+        @Override
+        protected Drawable doInBackground(String... url){
+            Log.d("IMAGE", "getting image from " + url);
+            try {
+                InputStream is = (InputStream) new URL(url[0]).getContent();
+                Drawable d = Drawable.createFromStream(is, "src name");
+                Log.d("IMAGE", "returning d " + d);
+                return d;
+            } catch (Exception e) {
+                Log.d("IMAGE", "Failed!" + e.toString());
+                return null;
+            }
+        }
+
+        protected void onPostExecute(String url) {
+            // TODO: check this.exception
+            // TODO: do something with the feed
+        }
+    }
+
+
 }
