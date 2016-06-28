@@ -1,6 +1,7 @@
 package net.arpcentral.pizzadoh.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.text.LoginFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.arpcentral.pizzadoh.R;
@@ -28,6 +32,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -56,6 +61,7 @@ public class ResourcesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -128,6 +134,9 @@ public class ResourcesActivity extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static final String ARG_RESOURCE_NAME = "The Name";
         private static final String ARG_RESOURCE_CAPTION = "I am the caption";
+        private static final String ARG_RESOURCE_IMG = "??????";
+        private static final String ARG_RESOURCE_URL = "www.somthing.com";
+        private static final String ARG_RESOURCE_CATEGORY = "Weapons";
 
 
         public PlaceholderFragment() {
@@ -140,24 +149,46 @@ public class ResourcesActivity extends AppCompatActivity {
         public static PlaceholderFragment newInstance(ExternalResource.Item item) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, 1);
             args.putString(ARG_RESOURCE_NAME, item.getName());
             args.putString(ARG_RESOURCE_CAPTION, item.getCaption());
+            args.putString(ARG_RESOURCE_URL, item.getUrl());
+            args.putString(ARG_RESOURCE_IMG, item.getImg());
+            args.putString(ARG_RESOURCE_CATEGORY, item.getCategory());
             fragment.setArguments(args);
             return fragment;
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_resources, container, false);
+
             TextView nameTextView = (TextView) rootView.findViewById(R.id.resource_name);
             nameTextView.setText(getArguments().getString(ARG_RESOURCE_NAME));
-            getActivity().setTitle(ARG_RESOURCE_NAME);
+
             TextView captionTextView = (TextView) rootView.findViewById(R.id.resource_caption);
             captionTextView.setText(getArguments().getString(ARG_RESOURCE_CAPTION));
 
+            Button urlButton = (Button) rootView.findViewById(R.id.resouce_url);
+
+            ImageView resource_image = (ImageView) rootView.findViewById(R.id.resource_img);
+            resource_image.setImageDrawable(image_from_url(getArguments().getString(ARG_RESOURCE_IMG)));
+
+            this.getActivity().setTitle(getArguments().getString(ARG_RESOURCE_CATEGORY));
+
             return rootView;
+        }
+    }
+
+    public static Drawable image_from_url(String url) {
+        Log.d("IMAGE", "getting image from " + url);
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            Log.d("IMAGE", "returning d " + d);
+            return d;
+        } catch (Exception e) {
+            Log.d("IMAGE", "Failed!" + e.toString());
+            return null;
         }
     }
 
@@ -166,40 +197,39 @@ public class ResourcesActivity extends AppCompatActivity {
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-        String json = readJsonData();
-        ExternalResource resources = new ExternalResource(json);
 
-        final ArrayList<ExternalResource.Item> equipment = resources.getByKey("Equipment");
-        final ArrayList<ExternalResource.Item> ingredients = resources.getByKey("Ingredients");
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
-        public Fragment getItem(int position) {
+        public Fragment getItem(int position){
+            String json = readJsonData();
+            ExternalResource resources = new ExternalResource(json);
+
+            final ArrayList<ExternalResource.Item> equipment = resources.getByKey("Equipment");
+            final ArrayList<ExternalResource.Item> ingredients = resources.getByKey("Ingredients");
+            final ArrayList<ExternalResource.Item> resource_items = resources.getAll();
+
             // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
+            // Return a PlaceholderFragment (defined as a static inner c
             Log.d("RESOURCE ACT", "getting position of " + position);
-            return PlaceholderFragment.newInstance(equipment.get(position));
+            Log.d("RESOURCE ACT" , "resources is" +  resource_items);
+            setTitle(resource_items.get(position).getCategory());
+            return PlaceholderFragment.newInstance(resource_items.get(position));
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 2;
+            String json = readJsonData();
+            ExternalResource resources = new ExternalResource(json);
+            final ArrayList<ExternalResource.Item> resource_items = resources.getAll();
+           return resource_items.size();
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "Equipment";
-                case 1:
-                    return "Ingredients";
-                case 2:
-                    return "SECTION 3";
-            }
-            return null;
+            return ExternalResource.keys()[position];
         }
     }
 }

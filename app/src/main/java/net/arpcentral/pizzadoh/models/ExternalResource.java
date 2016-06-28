@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Created by jarp on 6/27/16.
  */
 public class ExternalResource {
-    final String[] KEYS = {"Equipment", "Ingredients"};
+    final static String[] KEYS = {"Equipment", "Ingredients"};
     JSONObject json;
     public ExternalResource(String json_string){
 
@@ -24,8 +24,32 @@ public class ExternalResource {
         }
     }
 
-    public String[] keys(){
+    public static String[] keys(){
         return KEYS;
+    }
+
+    public ArrayList<Item> getAll(){
+        try{
+        //String raw_json = json.getString("Equipment");
+        ArrayList<Item> items =  new ArrayList<Item>();
+
+        JSONArray json_items = json.getJSONArray("Equipment");
+        for (int i = 0 ; i < json_items.length(); i++) {
+            JSONObject this_item = json_items.getJSONObject(i);
+            items.add(new Item(this_item, "Equipment"));
+        }
+        json_items = json.getJSONArray("Ingredients");
+        for (int i = 0 ; i < json_items.length(); i++) {
+            JSONObject this_item = json_items.getJSONObject(i);
+            items.add(new Item(this_item, "Ingredients"));
+        }
+
+        return items;
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        return new ArrayList<Item>();
+    }
     }
 
     public ArrayList<Item> getByKey(String key){
@@ -38,7 +62,7 @@ public class ExternalResource {
 
             for (int i = 0 ; i < json_items.length(); i++) {
                 JSONObject this_item = json_items.getJSONObject(i);
-                items.add(new Item(this_item));
+                items.add(new Item(this_item, key));
             }
             return items;
 
@@ -53,6 +77,7 @@ public class ExternalResource {
         String caption;
         String url;
         String img;
+        String category;
 
 //        public Item(String _name, String _caption, String _url, String _img){
 //            name = _name;
@@ -61,12 +86,13 @@ public class ExternalResource {
 //            img = _img;
 //        }
 
-        public Item(JSONObject json){
+        public Item(JSONObject json, String _category){
             try{
                 name = json.getString("name");
                 caption = json.getString("caption");
                 url = json.getString("url");
                 img = json.getString("img");
+                category = _category;
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -83,6 +109,18 @@ public class ExternalResource {
 
         public String getCaption(){
             return caption;
+        }
+
+        public String getUrl(){
+
+            return url;
+        }
+
+        public String getImg(){
+            return img;
+        }
+        public String getCategory(){
+            return category;
         }
     }
 }
