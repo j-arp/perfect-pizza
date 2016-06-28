@@ -63,11 +63,13 @@ public class DetailsActivity extends AppCompatActivity {
         String amount =         intent.getStringExtra("AMOUNT");
         Boolean use_starter =   intent.getBooleanExtra("USING_STARTER", false);
 
+        // set default starter amounts to defaults
         int starting_water = DEFAULT_WATER;
         int starting_flour = DEFAULT_FLOUR;
         String starting_water_text = Integer.toString(DEFAULT_WATER);
         String starting_flour_text = Integer.toString(DEFAULT_FLOUR);
 
+        // overwrites defaults if amounts are passed in
         if ( intent.hasExtra("STARTING_WATER") ){
             starting_water = Integer.parseInt(intent.getStringExtra("STARTING_WATER"));
             starting_flour = Integer.parseInt(intent.getStringExtra("STARTING_FLOUR"));
@@ -75,6 +77,7 @@ public class DetailsActivity extends AppCompatActivity {
             starting_flour_text = intent.getStringExtra("STARTING_FLOUR");
         }
 
+        RelativeLayout starter_container = (RelativeLayout)findViewById(R.id.starter_container);
 
         Ratio ratio = new Ratio(type, Integer.parseInt(amount), use_starter);
 
@@ -86,14 +89,14 @@ public class DetailsActivity extends AppCompatActivity {
         final EditText flour_starter_details_edit = (EditText) findViewById(R.id.flour_starter_data_edit);
         final EditText water_starter_details_edit = (EditText) findViewById(R.id.water_starter_data_edit);
 
-        RelativeLayout starter_container = (RelativeLayout)findViewById(R.id.starter_container);
         final TextView flour_details = (TextView)findViewById(R.id.flour_details_data);
         final TextView water_details = (TextView)findViewById(R.id.water_details_data);
+        Log.d("DETAILS ACT", "construct history with " + starting_water + " / " + starting_flour);
 
-        final History history = new History(0, "", starting_water, starting_flour, this);
-        history.type = type;
-        history.quantity = Integer.parseInt(amount);
-        history.save();
+        final History history = new History(1, "", starting_water, starting_flour, this);
+            history.setType(type);
+            history.setQuantity(amount);
+            history.save();
 
         //keep_screen_on_toggle_question.setAlpha(FADED);
 
@@ -101,14 +104,14 @@ public class DetailsActivity extends AppCompatActivity {
         if (use_starter){
             flour_starter_details.setText(starting_flour_text);
             water_starter_details.setText(starting_water_text);
-            history.starter_water = starting_water;
-            history.starter_flour = starting_flour;
+            history.setStarterWater(starting_water);
+            history.setStarterFlour(starting_flour);
         }
 
         else {
             starter_container.setVisibility(View.GONE);
-            history.starter_water = 0;
-            history.starter_flour = 0;
+            history.setStarterWater(0);
+            history.setStarterFlour(0);
         }
 
         final int adjusted_flour = (int) Math.round(ratio.getAdjustedFlour());
@@ -173,7 +176,7 @@ public class DetailsActivity extends AppCompatActivity {
                     water_starter_details.setText(v.getText().toString());
                     water_starter_details.setVisibility(View.VISIBLE);
                     water_starter_details_edit.setVisibility(View.GONE);
-                    history.starter_water = Integer.parseInt(v.getText().toString());
+                    history.setStarterWater(v.getText().toString());
                     hide_keyboard(flour_starter_details_edit);
                     History.replaceLast(history);
                     handled = true;
@@ -194,7 +197,7 @@ public class DetailsActivity extends AppCompatActivity {
                     flour_starter_details.setText(v.getText().toString());
                     flour_starter_details.setVisibility(View.VISIBLE);
                     flour_starter_details_edit.setVisibility(View.GONE);
-                    history.starter_flour = Integer.parseInt(v.getText().toString());
+                    history.setStarterFlour(v.getText().toString());
                     History.replaceLast(history);
                     hide_keyboard(flour_starter_details_edit);
                     handled = true;

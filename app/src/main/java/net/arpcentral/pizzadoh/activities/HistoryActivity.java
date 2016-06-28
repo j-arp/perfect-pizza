@@ -60,7 +60,7 @@ public class HistoryActivity extends AppCompatActivity {
 
 
                 String type = selectedHistory.type;
-                String amount = Integer.toString(selectedHistory.quantity);
+                String amount = selectedHistory.quantity.toString();
                 Boolean use_starter = selectedHistory.using_starter();
 
                 Intent intent = new Intent(view.getContext(), DetailsActivity.class);
@@ -69,8 +69,8 @@ public class HistoryActivity extends AppCompatActivity {
                 intent.putExtra("AMOUNT", amount);
                 intent.putExtra("USING_STARTER", use_starter);
 
-                intent.putExtra("STARTING_FLOUR", Integer.toString(selectedHistory.starter_flour));
-                intent.putExtra("STARTING_WATER", Integer.toString(selectedHistory.starter_water));
+                intent.putExtra("STARTING_FLOUR", selectedHistory.starter_flour.toString());
+                intent.putExtra("STARTING_WATER", selectedHistory.starter_water.toString());
                 Log.d("HISTORY ACT", "clicked on histoury: " + selectedHistory);
                 startActivity(intent);
                 // 2
