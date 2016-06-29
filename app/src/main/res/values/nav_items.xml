@@ -4,7 +4,6 @@
         name="nav_items">
         <item>About</item>
         <item>History</item>
-        <item>Resources</item>
-        <item>Rate</item>
+        <item>Recommendations</item>
     </string-array>
 </resources>

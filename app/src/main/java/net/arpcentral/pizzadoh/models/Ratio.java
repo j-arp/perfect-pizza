@@ -11,12 +11,16 @@ public class Ratio {
     public Double flour = 0.0;
     public String type = "";
     public Boolean with_starter = true;
+    public int custom_starter_water = 0;
+    public int custom_starter_flour = 0;
 
-    public Ratio(String _type, int _amount, boolean _with_starter){
+    public Ratio(String _type, int _amount, boolean _with_starter, int _custom_water, int _custom_flour){
         Log.d("RATIO", "CONSTRUCTED");
         flour = _amount * 125.0;
         water = flour * getPercent(_type);
         with_starter = _with_starter;
+        custom_starter_water = _custom_water;
+        custom_starter_flour = _custom_flour;
     }
 
     public Double getAdjustedFlour(){
@@ -29,7 +33,8 @@ public class Ratio {
 
     private int getStarterFlourAdjustment(){
         if (with_starter) {
-            return 100;
+            return custom_starter_flour == 0 ? 100 : custom_starter_flour;
+
         }
 
         else{
@@ -39,7 +44,7 @@ public class Ratio {
 
     private int getStarterWaterAdjustment(){
         if (with_starter) {
-            return 150;
+            return custom_starter_flour == 0 ? 150 : custom_starter_water;
         }
 
         else{

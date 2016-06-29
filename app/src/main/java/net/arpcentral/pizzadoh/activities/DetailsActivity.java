@@ -79,7 +79,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         RelativeLayout starter_container = (RelativeLayout)findViewById(R.id.starter_container);
 
-        Ratio ratio = new Ratio(type, Integer.parseInt(amount), use_starter);
+        Ratio ratio = new Ratio(type, Integer.parseInt(amount), use_starter, starting_water, starting_flour);
 
         final TextView info_title = (TextView)findViewById(R.id.info_title);
 
