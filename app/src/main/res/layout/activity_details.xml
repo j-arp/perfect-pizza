@@ -24,13 +24,39 @@
 
     <include layout="@layout/content_details" />
 
+
+
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/reset_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:textColor="@android:color/white"
         android:src="@android:drawable/ic_menu_revert" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/reset_button"
+        app:layout_anchorGravity="top|end">
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/continue_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            app:layout_anchorGravity="top|end"
+            android:layout_marginBottom="65dp"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/ic_continue_black_24dp"
+            android:tint="#ffffff"
+            app:backgroundTint="@color/colorAccent"
+            android:baselineAlignBottom="false" />
+
+
+    </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>

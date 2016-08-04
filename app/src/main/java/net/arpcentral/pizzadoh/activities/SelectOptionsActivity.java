@@ -16,6 +16,8 @@ import net.arpcentral.pizzadoh.R;
 import net.arpcentral.pizzadoh.activities.DetailsActivity;
 import net.arpcentral.pizzadoh.models.PizzaType;
 
+import java.util.HashMap;
+
 
 public class SelectOptionsActivity extends AppCompatActivity {
     static Spinner type_spinner = null;
@@ -122,10 +124,11 @@ public class SelectOptionsActivity extends AppCompatActivity {
 
             Intent intent = new Intent(view.getContext(), DetailsActivity.class);
 
-            intent.putExtra("TYPE", type);
-            intent.putExtra("AMOUNT", amount);
-            intent.putExtra("USING_STARTER", use_starter);
-
+            HashMap<String,String> batch_values = new HashMap<String, String>();
+                batch_values.put("TYPE", type);
+                batch_values.put("AMOUNT", amount);
+                batch_values.put("USING_STARTER", use_starter.toString());
+            intent.putExtra("BATCH", batch_values);
             startActivity(intent);
             }
         });

@@ -1,0 +1,39 @@
+{
+
+  "Preparation":
+  [
+    {
+      "name" : "Measure Flour For the Starter",
+      "directions" : "Using a small bowl and a scale, pour out the exact number of grams of flour",
+      "img": "steps_starter_flour"},
+    {
+      "name" : "Measure Water For the Starter",
+      "directions" : "Using another small bowl and a scale, pour out the exact number of grams of flour. Use warm water if you plan to use the starter to also proof your yeast.",
+      "img": "steps_starter_water"},
+    {
+      "name" : "Complete the Starter",
+      "directions" : "Mix the measured flour and water by pouring the water into the bowl of flour. If you are using the starter to proof your yeast, add the yeast and sugar to the starter. Use a package of yeast for every 4-6 pizzas being made. The amount of sugar is to taste.",
+      "img": "steps_starter_mix"},
+    {
+      "name" : "Let the Starter Rise",
+      "directions" : "Let the starter rise for AT LEAST an hour. The longer the better. You will have to remix the starter occasionally.",
+      "img": "steps_starter_rise"}
+  ]
+,
+  "Dough": [
+    {
+      "name" : "Combine Starter and the Remaining Ingredients",
+      "directions" : "Once the starter has risen for at least an hour, add the remaining flour, water, salt, and Olive Oil into the mixer or larger bowl.",
+      "img": "steps_mix"},
+
+    {
+      "name" : "Mix or Knead the Dough",
+      "directions" : "Using a mixer or your hands, knead the dough until it is smooth. Based on the type of pizza you are making it may be a little sticky. Once mixed, let it sit for approximately 5 minutes, then re-knead it one more time",
+      "img": ""},
+
+    {
+      "name" : "Let the Dough Rise",
+      "directions" : "No let your dough rise for as long as possible. At least one hour. For the best dough, let it sit in the refrigurator over night.",
+      "img": ""}
+  ]
+}

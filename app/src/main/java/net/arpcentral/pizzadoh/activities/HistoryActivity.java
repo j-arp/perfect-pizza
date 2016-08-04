@@ -18,6 +18,7 @@ import net.arpcentral.pizzadoh.activities.WelcomeActivity;
 import net.arpcentral.pizzadoh.models.History;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HistoryActivity extends AppCompatActivity {
     static FloatingActionButton clear_history_button = null;
@@ -65,12 +66,17 @@ public class HistoryActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(view.getContext(), DetailsActivity.class);
 
-                intent.putExtra("TYPE", type);
-                intent.putExtra("AMOUNT", amount);
-                intent.putExtra("USING_STARTER", use_starter);
 
-                intent.putExtra("STARTING_FLOUR", selectedHistory.starter_flour.toString());
-                intent.putExtra("STARTING_WATER", selectedHistory.starter_water.toString());
+
+                HashMap<String,String> batch_values = new HashMap<String, String>();
+                    batch_values.put("TYPE", type);
+                    batch_values.put("AMOUNT", amount);
+                    batch_values.put("USING_STARTER", use_starter.toString());
+                    batch_values.put("STARTING_FLOUR", selectedHistory.starter_flour.toString());
+                    batch_values.put("STARTING_WATER", selectedHistory.starter_water.toString());
+
+                intent.putExtra("BATCH", batch_values);
+
                 Log.d("HISTORY ACT", "clicked on histoury: " + selectedHistory);
                 startActivity(intent);
                 // 2

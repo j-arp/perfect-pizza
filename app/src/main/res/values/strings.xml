@@ -129,5 +129,6 @@
     <string name="drawer_close">drawer close</string>
     <string name="title_activity_recources">RecourcesActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_steps">StepsActivity</string>
 
 </resources>

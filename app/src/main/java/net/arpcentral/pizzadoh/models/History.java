@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class History {
 
     /****** Constructor *************************/
     public History(int _quantity, String _type, int _starter_water, int _starter_flour, Context _context){
-        System.out.println("HISTORY CONTSRUCT// quant: " + _quantity + " type: " + _type + " water: " + _starter_water + " flour: " + _starter_flour );
+        //System.out.println("HISTORY CONTSRUCT// quant: " + _quantity + " type: " + _type + " water: " + _starter_water + " flour: " + _starter_flour );
         quantity = new Amount(_quantity);
         type = _type;
         starter_flour = new Amount(_starter_flour);
@@ -61,9 +62,9 @@ public class History {
         ArrayList<History> all = History.fetch(history.context);
 
         for (History item : all) {
-            Log.d("HISTORY#contains", "does history: " + item.toDelimited(true) + " contain? " + history.toDelimited(true));
+            // Log.d("HISTORY#contains", "does history: " + item.toDelimited(true) + " contain? " + history.toDelimited(true));
             if (item.toDelimited(true).toString().equals(history.toDelimited(true).toString())){
-                Log.d("HISTORY#contains", "yes! it was found");
+                // Log.d("HISTORY#contains", "yes! it was found");
                 result = true;
                 break;
             }
@@ -72,7 +73,7 @@ public class History {
     }
     /****** to Delimited *************************/
     public String toDelimited(){
-        System.out.println("to deliited with " + quantity);
+        // System.out.println("to deliited with " + quantity);
         return Integer.toString(id)
                 + ":"
                + quantity.toString()
@@ -85,11 +86,20 @@ public class History {
     }
 
     /****** to delimited with override  *************************/
-    public String toDelimited(boolean with_id){
-        Log.d("HISTORY", "#toDelimited: " + quantity.toString());
-        Log.d("HISTORY", "#toDelimited: " + starter_water.toString());
-        Log.d("HISTORY", "#toDelimited: " + starter_flour.toString());
+    public HashMap<String,String> toHashMap(){
+        HashMap<String,String> batch_values = new HashMap<String,String>();
 
+        batch_values.put("TYPE", type);
+        batch_values.put("AMOUNT", quantity.toString());
+        batch_values.put("USING_STARTER", String.valueOf(using_starter()));
+        batch_values.put("STARTING_FLOUR", starter_flour.toString());
+        batch_values.put("STARTING_WATER", starter_water.toString());
+        return batch_values;
+    }
+
+
+    /****** to delimited with override  *************************/
+    public String toDelimited(boolean with_id){
         if ( with_id ){
             return toDelimited();
         }
@@ -108,17 +118,17 @@ public class History {
         }
 
         id = stored_history.isEmpty() ? 1 : stored_history.size();
-        Log.d("HISTORY#save", "is " + toDelimited(false) + " found in " + History.fetch(context) + " / answer is " + History.contains(this));
+        //Log.d("HISTORY#save", "is " + toDelimited(false) + " found in " + History.fetch(context) + " / answer is " + History.contains(this));
 
         if (!History.contains(this)){
-            Log.d("HISTORY#save", "NEW history // Not Found: " + toDelimited());
+            //Log.d("HISTORY#save", "NEW history // Not Found: " + toDelimited());
 
             stored_history.add(toDelimited());
             editor.putStringSet("history", stored_history);
             editor.commit();
         }
 
-        Log.d("HISTORY#save" , "saved. its now " + History.fetch(context));
+        //Log.d("HISTORY#save" , "saved. its now " + History.fetch(context));
     }
 
     public static void replaceLast(History history){
@@ -128,16 +138,16 @@ public class History {
         Set<String> stored_history = temp_settings.getStringSet("history", null);
         ArrayList<History> all = History.fetch((history.context));
 
-        Log.d("HISTORY#replace", "Stored list is: " + stored_history);
-        Log.d("HISTORY#replace", "History list is: " + all);
+        //Log.d("HISTORY#replace", "Stored list is: " + stored_history);
+        //Log.d("HISTORY#replace", "History list is: " + all);
 
         History last = all.get(0);
-        Log.d("HISTORY#replace", "Removing last entered: " + last.toDelimited());
+        //Log.d("HISTORY#replace", "Removing last entered: " + last.toDelimited());
         stored_history.remove(last.toDelimited());
         my_editor.putStringSet("history", stored_history);
         my_editor.commit();
 
-        Log.d("HISTORY", "list is now : " + stored_history);
+        //Log.d("HISTORY", "list is now : " + stored_history);
 
 
         history.save();
@@ -161,11 +171,11 @@ public class History {
 
             for (String temp : stored_history) {
                 String attrs[] = temp.split(":");
-                Log.d("HIST ARGS", "demlitmited: " + temp);
-                Log.d("HIST ARGS", "quant: " + attrs[1]);
-                Log.d("HIST ARGS", "type: " + attrs[2]);
-                Log.d("HIST ARGS", "water: " + attrs[3]);
-                Log.d("HIST ARGS", "flour: " + attrs[4]);
+          //      Log.d("HIST ARGS", "demlitmited: " + temp);
+            //    Log.d("HIST ARGS", "quant: " + attrs[1]);
+              //  Log.d("HIST ARGS", "type: " + attrs[2]);
+                //Log.d("HIST ARGS", "water: " + attrs[3]);
+                //Log.d("HIST ARGS", "flour: " + attrs[4]);
                 History history = new History(Integer.parseInt(attrs[1]), attrs[2], Integer.parseInt(attrs[3]), Integer.parseInt(attrs[4]), _context);
                 history.id = Integer.parseInt(attrs[0]);
                 all.add(history);
@@ -188,32 +198,32 @@ public class History {
     }
 
     public void setStarterWater(int q){
-        Log.d("HISTORY" , "set water starter with  " +  q);
+        //Log.d("HISTORY" , "set water starter with  " +  q);
         starter_water = new Amount(q);
     }
 
     public void setStarterFlour(int q){
-        Log.d("HISTORY" , "set flour starter with  " +  q);
+        //Log.d("HISTORY" , "set flour starter with  " +  q);
         starter_flour = new Amount(q);
     }
 
     public void setQuantity(String q){
-        Log.d("HISTORY" , "set quantity with  " +  q);
+        //Log.d("HISTORY" , "set quantity with  " +  q);
         quantity = new Amount(q);
     }
 
     public void setStarterWater(String q){
-        Log.d("HISTORY" , "set water starter with  " +  q);
+        //Log.d("HISTORY" , "set water starter with  " +  q);
         starter_water = new Amount(q);
     }
 
     public void setStarterFlour(String q){
-        Log.d("HISTORY" , "set flour starter with  " +  q);
+        //Log.d("HISTORY" , "set flour starter with  " +  q);
         starter_flour = new Amount(q);
     }
 
     public void setType(String t){
-        Log.d("HISTORY" , "set type starter with  " +  t);
+        //Log.d("HISTORY" , "set type starter with  " +  t);
         type = t;
     }
 }

@@ -35,9 +35,10 @@ public class Amount {
     }
 
     private void puts(int x){
-        Log.d("PUTS", "init amount with " + x);
+        //Log.d("PUTS", "init amount with " + x);
     }
+
     private void puts(String x){
-        Log.d("PUTS", "init amount with " + x);
+        //Log.d("PUTS", "init amount with " + x);
     }
 }
