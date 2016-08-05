@@ -1,10 +1,13 @@
 package net.arpcentral.pizzadoh.activities;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -15,7 +18,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import net.arpcentral.pizzadoh.R;
@@ -43,13 +45,14 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-
+        final String TAG = "Details Activity";
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Secret To Your Perfect Crust");
 
         Intent intent = getIntent();
+        Log.d(TAG, "getting intent");
 
         reset_button = (FloatingActionButton) this.findViewById(R.id.reset_button);
         continue_button = (FloatingActionButton) this.findViewById(R.id.continue_button);
@@ -84,6 +87,45 @@ public class DetailsActivity extends AppCompatActivity {
             starting_water = Integer.parseInt(starting_water_value);
             starting_water_text = starting_water_value;
         }
+
+        NotificationCompat.Builder mBuilder =
+                (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_mood_black_24dp)
+                        .setContentTitle("Perfect Pizza")
+                        .setContentInfo("Your measurements are waiting for you")
+                ;
+
+        int mNotificationId = 001;
+        // Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        // Builds the notification and issues it.
+
+
+
+        Intent resultIntent = new Intent(this, DetailsActivity.class);
+        resultIntent.putExtra("BATCH", batch_values);
+
+        Log.d(TAG, "getting amount and type: " + batch_values.get("AMOUNT") + " / " + batch_values.get("TYPE"));
+
+
+
+        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        // Because clicking the notification opens a new ("special") activity, there's
+        // no need to create an artificial back stack.
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        mNotificationId,
+                        resultIntent,
+                        PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_CANCEL_CURRENT
+                );
+
+
+        mBuilder.setContentIntent(resultPendingIntent);
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
 
 
         RelativeLayout starter_container = (RelativeLayout)findViewById(R.id.starter_container);

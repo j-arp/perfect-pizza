@@ -1,39 +1,81 @@
 {
 
-  "Preparation":
+  "Starter":
   [
     {
       "name" : "Measure Flour For the Starter",
       "directions" : "Using a small bowl and a scale, pour out the exact number of grams of flour",
-      "img": "steps_starter_flour"},
+      "img": "starter_flour"},
     {
       "name" : "Measure Water For the Starter",
       "directions" : "Using another small bowl and a scale, pour out the exact number of grams of flour. Use warm water if you plan to use the starter to also proof your yeast.",
-      "img": "steps_starter_water"},
+      "img": "starter_water"},
     {
       "name" : "Complete the Starter",
       "directions" : "Mix the measured flour and water by pouring the water into the bowl of flour. If you are using the starter to proof your yeast, add the yeast and sugar to the starter. Use a package of yeast for every 4-6 pizzas being made. The amount of sugar is to taste.",
-      "img": "steps_starter_mix"},
+      "img": "starter_mix"},
     {
       "name" : "Let the Starter Rise",
       "directions" : "Let the starter rise for AT LEAST an hour. The longer the better. You will have to remix the starter occasionally.",
-      "img": "steps_starter_rise"}
+      "img": "start_rise"}
   ]
 ,
   "Dough": [
     {
       "name" : "Combine Starter and the Remaining Ingredients",
       "directions" : "Once the starter has risen for at least an hour, add the remaining flour, water, salt, and Olive Oil into the mixer or larger bowl.",
-      "img": "steps_mix"},
+      "img": "mix"},
 
     {
       "name" : "Mix or Knead the Dough",
       "directions" : "Using a mixer or your hands, knead the dough until it is smooth. Based on the type of pizza you are making it may be a little sticky. Once mixed, let it sit for approximately 5 minutes, then re-knead it one more time",
-      "img": ""},
+      "img": "dough_kneed"},
 
     {
       "name" : "Let the Dough Rise",
       "directions" : "No let your dough rise for as long as possible. At least one hour. For the best dough, let it sit in the refrigurator over night.",
+      "img": "dough_rise"},
+    {
+      "name" : "Turn on Oven",
+      "directions" : "Turn on the oven as high as it goes. 500 degrees or higher if possible. Set your pizza stone in so it can also heat up. The Pizza Stone should be heating for at least an hour before baking.",
       "img": ""}
+  ],
+  "Preparation": [
+    {
+      "name" : "Roll Out Dough",
+      "directions" : "Roll out the dough so it looks like a long cylinder.",
+      "img": "dough_role"},
+    {
+      "name" : "Slice Dough into Sections",
+      "directions" : "Using a knife, slice the dough evenly making a number of sections that equal the number of pizzas you plan to make.",
+      "img": "dough_slices"},
+    {
+      "name" : "Form Dough Slices into Balls",
+      "directions" : "Using good technique, transform the dough slices into perfectly round balls.",
+      "img": "dough_balls"},
+    {
+      "name" : "Let Dough Rise Again",
+      "directions" : "Cover your dough with Cling Film and a damp towel and let them rise again.",
+      "img": "dough_balls_rise"},
+    {
+      "name" : "Flatten Dough for Pizza Crusts",
+      "directions" : "Either by using a Rolling Pin (please don't) or by tossing the dough, flatten out the dough for your pizza. Leave the other balls under the towel until you are ready to make them.",
+      "img": "dough_flatten"}
+    ],
+  "Cook": [
+
+    {
+      "name" : "Cook Your Pizza",
+      "directions" : "Cook your pizza until it's done. Approximately 7 minutes. Your oven's temperature will determine just how long it will take.",
+      "img": "cook"
+      }
+  ],
+  "Eat": [
+
+    {
+      "name" : "Enjoy Your Tasty Pizza",
+      "directions" : "Eat your perfect pizza!",
+      "img": "eat"
+    }
   ]
 }
