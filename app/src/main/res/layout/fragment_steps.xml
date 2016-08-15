@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,6 +8,12 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activities.StepsActivity$PlaceholderFragment">
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
 
     <TextView
         android:id="@+id/step_name"
@@ -31,16 +37,25 @@
             android:minHeight="480dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"/>
+    <Button
+        android:id="@+id/step_url"
+        android:contentDescription="https://www.amazon.com"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Watch Video"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:textColor="#fff"
+        android:clickable="true"
+        android:onClick="playVideo"
+        android:layout_marginTop="20dp" />
+
 
         <TextView
             android:id="@+id/step_directions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_weight="3"
             android:textSize="@dimen/regular_text"
             android:textColor="@color/greyer"
             android:text="Phasellus accumsan cursus velit. Proin magna. Cras non dolor.  Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. Phasellus viverra nulla ut metus varius laoreet. Etiam rhoncus." />
-
-
 </LinearLayout>
+</ScrollView>

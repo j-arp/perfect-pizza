@@ -81,6 +81,7 @@ public class Step {
         String directions;
         String img;
         String category;
+        String url;
 
 //        public Item(String _name, String _directions, String _url, String _img){
 //            name = _name;
@@ -94,6 +95,7 @@ public class Step {
                 name = json.getString("name");
                 directions = json.getString("directions");
                 img = json.getString("img");
+                url = json.getString("url");
                 category = _category;
             }
             catch (Exception e) {
@@ -107,6 +109,10 @@ public class Step {
 
         public String getName(){
             return name;
+        }
+
+        public String getUrl(){
+            return url;
         }
 
         public String getDirections(){

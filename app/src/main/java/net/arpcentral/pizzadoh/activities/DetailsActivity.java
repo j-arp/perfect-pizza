@@ -105,6 +105,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         Intent resultIntent = new Intent(this, DetailsActivity.class);
         resultIntent.putExtra("BATCH", batch_values);
+        resultIntent.putExtra("STEP", 0);
 
         Log.d(TAG, "getting amount and type: " + batch_values.get("AMOUNT") + " / " + batch_values.get("TYPE"));
 
