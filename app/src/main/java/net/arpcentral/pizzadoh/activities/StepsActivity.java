@@ -98,12 +98,20 @@ String TAG = "Steps Activity";
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            Log.d(TAG, "back arrow >>>>>>>>>>>");
-            Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
+            Intent intent = new Intent(getApplicationContext(), DetailsActivity.class);
             Intent current_intent = getIntent();
-            intent.putExtra("BATCH", current_intent.getSerializableExtra("BATCH"));
-            startActivity(intent);
+            HashMap<String, String> old_batch = (HashMap<String, String>)current_intent.getSerializableExtra("BATCH");
 
+            HashMap<String,String> batch_values = new HashMap<String, String>();
+                batch_values.put("TYPE", old_batch.get("TYPE"));
+                batch_values.put("AMOUNT", old_batch.get("AMOUNT"));
+                batch_values.put("USING_STARTER", old_batch.get("USING_STARTER"));
+
+            Log.d(TAG, "back arrow >>>>>>>>>>> with " + batch_values);
+            intent.putExtra("BATCH", batch_values);
+            intent.putExtra("TEST", "TEST");
+            startActivity(intent);
+            return true;
         }
         return false;
     }

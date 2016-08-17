@@ -59,7 +59,11 @@ public class DetailsActivity extends AppCompatActivity {
         starter_flour_text_field = (TextView) this.findViewById(R.id.flour_starter_data);
         starter_water_text_field = (TextView) this.findViewById(R.id.water_starter_data);
 
+        final String test_str = (String) intent.getSerializableExtra("TEST");
+        Log.d(TAG, "Test Str is " + test_str);
+
         final HashMap<String, String> batch_values = (HashMap<String, String>)intent.getSerializableExtra("BATCH");
+        Log.d(TAG, "getting batch valies: " + batch_values);
             String type =           batch_values.get("TYPE");
             String amount =         batch_values.get("AMOUNT");
             Boolean use_starter =   batch_values.get("USING_STARTER").equals("true") ? true : false;
