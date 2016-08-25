@@ -92,45 +92,6 @@ public class DetailsActivity extends AppCompatActivity {
             starting_water_text = starting_water_value;
         }
 
-        NotificationCompat.Builder mBuilder =
-                (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_mood_black_24dp)
-                        .setContentTitle("Perfect Pizza")
-                        .setContentInfo("Your measurements are waiting for you")
-                ;
-
-        int mNotificationId = 001;
-        // Gets an instance of the NotificationManager service
-        NotificationManager mNotifyMgr =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        // Builds the notification and issues it.
-
-
-
-        Intent resultIntent = new Intent(this, DetailsActivity.class);
-        resultIntent.putExtra("BATCH", batch_values);
-        resultIntent.putExtra("STEP", 0);
-
-        Log.d(TAG, "getting amount and type: " + batch_values.get("AMOUNT") + " / " + batch_values.get("TYPE"));
-
-
-
-        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        // Because clicking the notification opens a new ("special") activity, there's
-        // no need to create an artificial back stack.
-        PendingIntent resultPendingIntent =
-                PendingIntent.getActivity(
-                        this,
-                        mNotificationId,
-                        resultIntent,
-                        PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_CANCEL_CURRENT
-                );
-
-
-        mBuilder.setContentIntent(resultPendingIntent);
-        mNotifyMgr.notify(mNotificationId, mBuilder.build());
-
 
 
         RelativeLayout starter_container = (RelativeLayout)findViewById(R.id.starter_container);
@@ -176,6 +137,65 @@ public class DetailsActivity extends AppCompatActivity {
         info_title_field.setText(amount + " " + type + " Pizzas");
         flour_text_field.setText(Integer.toString(adjusted_flour));
         water_text_field.setText(Integer.toString(adjusted_water));
+
+
+
+
+        NotificationCompat.Builder mBuilder =
+                (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.ic_scales)
+                        .setContentTitle("Perfect Pizza")
+                        .setContentInfo("Your measurements for " + batch_values.get("AMOUNT") + " " + batch_values.get("TYPE") + " styled pizzas.")
+                ;
+
+
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+        String[] events = new String[6];
+        // Sets a title for the Inbox in expanded layout
+        inboxStyle.setBigContentTitle("Your Pizza Dough Measurement:");
+        if ( use_starter  ) {
+            inboxStyle.addLine("Starter: " + starting_water_text + "g water / " + starting_flour_text + "g flour");
+        }
+        inboxStyle.addLine("Flour: " + adjusted_flour +   " grams");
+        inboxStyle.addLine("Water: " + adjusted_water +   " grams");
+
+        // Moves the expanded layout object into the notification object.
+        mBuilder.setStyle(inboxStyle);
+
+        int mNotificationId = 001;
+        // Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        // Builds the notification and issues it.
+
+
+
+        Intent resultIntent = new Intent(this, DetailsActivity.class);
+        resultIntent.putExtra("BATCH", batch_values);
+        resultIntent.putExtra("STEP", 0);
+
+        Log.d(TAG, "getting amount and type: " + batch_values.get("AMOUNT") + " / " + batch_values.get("TYPE"));
+
+
+
+        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        // Because clicking the notification opens a new ("special") activity, there's
+        // no need to create an artificial back stack.
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        mNotificationId,
+                        resultIntent,
+                        PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_CANCEL_CURRENT
+                );
+
+
+        mBuilder.setContentIntent(resultPendingIntent);
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
+
+
 
         continue_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -251,6 +271,11 @@ public class DetailsActivity extends AppCompatActivity {
                 return handled;
             }
         });
+
+
+
+
+
 
 
     }

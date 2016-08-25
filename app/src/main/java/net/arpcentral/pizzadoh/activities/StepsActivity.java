@@ -225,7 +225,7 @@ String TAG = "Steps Activity";
             final ArrayList<Step.Item> step_items = steps.getAll();
 
             Log.d("STEP ACT" , "Get fragment for step " +  position);
-            put_notification(getIntent(),batch_values, position);
+            // put_notification(getIntent(),batch_values, position);
             setTitle(step_items.get(position).getCategory());
             return PlaceholderFragment.newInstance(step_items.get(position));
         }

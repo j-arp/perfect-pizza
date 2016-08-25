@@ -4,19 +4,13 @@
   [
     {
       "name" : "Measure Flour For the Starter",
-      "directions" : "Using a small bowl and a scale, pour out the exact number of grams of flour",
+      "directions" : "Using a small bowl and your scale, pour out the exact number of grams of flour",
       "img": "starter_flour",
       "url": ""},
 
     {
-      "name" : "Form Each Section of Dough into Balls",
-      "directions" : "Using good technique, transform the dough slices into perfectly round balls.",
-      "img": "dough_balls",
-      "url": "https://www.youtube.com/watch?v=CQaJqHW0BZw"},
-
-    {
       "name" : "Measure Water For the Starter",
-      "directions" : "Using another small bowl and a scale, pour out the exact number of grams of flour. Use warm water if you plan to use the starter to also proof your yeast.",
+      "directions" : "Using another small bowl and your scale, add the exact number of grams of water. Use warm water if you plan to use the starter to also proof your yeast.",
       "img": "starter_water",
       "url": ""},
     {
@@ -26,7 +20,7 @@
       "url": ""},
     {
       "name" : "Let the Starter Rise",
-      "directions" : "Let the starter rise for AT LEAST an hour. The longer the better. You will have to remix the starter occasionally.",
+      "directions" : "Let the starter rise for AT LEAST an hour. The longer the better. You will have to stir down the starter occasionally.",
       "img": "start_rise",
       "url": ""}
   ]
@@ -40,38 +34,37 @@
 
     {
       "name" : "Mix or Knead the Dough",
-      "directions" : "Using a mixer or your hands, knead the dough until it is smooth. Based on the type of pizza you are making it may be a little sticky. Once mixed, let it sit for approximately 5 minutes, then re-knead it one more time",
+      "directions" : "Using a mixer or your hands, knead the dough until it is smooth. Based on the type of pizza you are making it may be a little sticky. Once mixed, let it sit for approximately 5 minutes, then re-knead or mix it one more time",
       "img": "dough_kneed",
       "url": ""},
 
     {
       "name" : "Let the Dough Rise",
-      "directions" : "No let your dough rise for as long as possible. At least one hour. For the best dough, let it sit in the refrigurator over night.",
+      "directions" : "Now let your dough rise for as long as possible. At least one hour. For the best results, let it sit in the refrigerator over night.",
       "img": "dough_rise",
       "url": ""},
     {
       "name" : "Turn on Oven",
-      "directions" : "Turn on the oven as high as it goes. 500 degrees or higher if possible. Set your pizza stone in so it can also heat up. The Pizza Stone should be heating for at least an hour before baking.",
+      "directions" : "Turn on the oven as high as it goes. 500 degrees or higher, if possible. Set your pizza stone in the oven so it can also heat up. The pizza stone should be heating for at least an hour before baking.",
       "img": "",
       "url": ""}
   ],
   "Preparation": [
     {
       "name" : "Divide Dough into Sections",
-      "directions" : "Using a knife, slice the dough evenly making a number of sections that equal the number of pizzas you plan to make. You may want to use your scale during this process as well.",
+      "directions" : "Using a knife, slice the dough evenly into sections that equal the number of pizzas you plan to make. You may want to use your scale during this process as well so all pizzas are the same size.",
       "img": "dough_slices",
       "url": ""},
 
-    //it goes here
+    {
+      "name" : "Form Each Section of Dough into Balls",
+      "directions" : "Using good technique, transform the dough slices into perfectly round balls.",
+      "img": "dough_balls",
+      "url": "https://www.youtube.com/watch?v=CQaJqHW0BZw"},
 
     {
-      "name" : "Let Dough Rise Again",
-      "directions" : "Cover your dough with Cling Film and a damp towel and let them rise again.",
-      "img": "dough_balls_rise",
-      "url": ""},
-    {
       "name" : "Flatten Dough for Pizza Crusts",
-      "directions" : "Using you hands, flatten the dough for your pizza. You may also toss it or use another technique to thin out the dough further. Leave the other balls under the towel until you are ready to make them.",
+      "directions" : "Using you hands, flatten the dough for your pizza. You may also toss it or use another technique to thin out the dough further. Leave the other balls under cling film and a damp towel until you are ready to make them.",
       "img": "dough_flatten",
       "url": ""}
     ],

@@ -25,20 +25,42 @@
     <include layout="@layout/content_details" />
 
 
-
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/reset_button"
+    <FrameLayout
+        android:id="@+id/reset_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_revert" />
+        >
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/reset_button"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="35dp"
+            android:src="@android:drawable/ic_menu_revert"
+            android:baselineAlignBottom="false"
+            android:layout_marginRight="16dp" />
+
+        <TextView
+            android:id="@+id/reset_button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset"
+            android:textSize="@dimen/tiny_text"
+            android:textColor="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="10dp" />
+
+    </FrameLayout>
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_anchor="@id/reset_button"
+        app:layout_anchor="@id/reset_frame"
         app:layout_anchorGravity="top|end">
 
 
@@ -46,15 +68,23 @@
             android:id="@+id/continue_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-
             app:layout_anchorGravity="top|end"
-            android:layout_marginBottom="65dp"
+            android:layout_marginBottom="125dp"
             android:layout_marginRight="16dp"
             android:src="@drawable/ic_continue_black_24dp"
             android:tint="#ffffff"
             app:backgroundTint="@color/colorAccent"
             android:baselineAlignBottom="false" />
+
+        <TextView
+            android:id="@+id/continue_button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Steps"
+            android:textSize="@dimen/tiny_text"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="10dp" />
 
 
     </FrameLayout>

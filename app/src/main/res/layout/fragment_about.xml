@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="My foodie Bro was using an Excel Spreadheet to determine the correct hydration for his pizza crusts. This is easier."
+            android:text="My foodie Bro was using an Excel Spreadheet to determine the correct hydration levels for his pizza dough. This is easier."
             android:textSize="@dimen/regular_text"/>
 
 
@@ -40,7 +40,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Look for exciting new features. For instance, quick links to previous selections, links to high quality products. Maybe tips."
+            android:text="I'd like to add built in timers to the steps. Also, image sharing of delicious pizzas users make."
             android:textSize="@dimen/regular_text"/>
     </LinearLayout>
 </RelativeLayout>
