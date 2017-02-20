@@ -12,16 +12,24 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import net.arpcentral.pizzadoh.PizzaDohApp;
 import net.arpcentral.pizzadoh.R;
 import net.arpcentral.pizzadoh.activities.DetailsActivity;
 import net.arpcentral.pizzadoh.activities.WelcomeActivity;
 import net.arpcentral.pizzadoh.models.History;
 
+import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.analytics.HitBuilders;
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+
 public class HistoryActivity extends AppCompatActivity {
     static FloatingActionButton clear_history_button = null;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +39,15 @@ public class HistoryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Your Past Activity");
 
+        PizzaDohApp application = (PizzaDohApp) getApplication();
+        mTracker = application.getDefaultTracker();
 
+
+        Log.i("GA", "Analyticing results screen");
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("View")
+                .setAction("View History")
+                .build());
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -47,6 +63,12 @@ public class HistoryActivity extends AppCompatActivity {
         clear_history_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Log.d("HISTORY ACT", "clicked clear all");
+
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Click")
+                        .setAction("Cleared History")
+                        .build());
+
                 History.clear(view.getContext());
                 history_list.setAdapter(clear_adapter);
             }
@@ -59,6 +81,11 @@ public class HistoryActivity extends AppCompatActivity {
                 // 1
                 History selectedHistory = all_history.get(position);
 
+
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Click")
+                        .setAction("Selected from History")
+                        .build());
 
                 String type = selectedHistory.type;
                 String amount = selectedHistory.quantity.toString();

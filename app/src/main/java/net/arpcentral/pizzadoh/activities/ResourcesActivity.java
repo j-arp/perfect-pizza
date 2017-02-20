@@ -25,6 +25,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+
+import net.arpcentral.pizzadoh.PizzaDohApp;
 import net.arpcentral.pizzadoh.R;
 import net.arpcentral.pizzadoh.models.ExternalResource;
 
@@ -36,7 +39,8 @@ import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
-
+import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.analytics.HitBuilders;
 
 public class ResourcesActivity extends AppCompatActivity {
 
@@ -54,6 +58,7 @@ public class ResourcesActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +69,13 @@ public class ResourcesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        PizzaDohApp application = (PizzaDohApp) getApplication();
+        mTracker = application.getDefaultTracker();
 
+
+        Log.i("GA", "Analyticing Resources screen");
+        mTracker.setScreenName("Resources Screen");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());

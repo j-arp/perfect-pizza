@@ -12,9 +12,14 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
+import net.arpcentral.pizzadoh.PizzaDohApp;
 import net.arpcentral.pizzadoh.R;
 import net.arpcentral.pizzadoh.activities.DetailsActivity;
 import net.arpcentral.pizzadoh.models.PizzaType;
+
 
 import java.util.HashMap;
 
@@ -30,6 +35,7 @@ public class SelectOptionsActivity extends AppCompatActivity {
     public final static String TYPE = "";
     public final static String USE_STARTER = "";
     public final static Float FADED = new Float(.4);
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +44,16 @@ public class SelectOptionsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Select Pizza Options");
-
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        PizzaDohApp application = (PizzaDohApp) getApplication();
+        mTracker = application.getDefaultTracker();
+
+        Log.i("GA", "Analyticing Options screen");
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("View")
+                .setAction("View Options")
+                .build());
         // Assign all the UI elements
         using_starter_question = (TextView) this.findViewById(R.id.using_starter_question);
         calculate_button = (FloatingActionButton) this.findViewById(R.id.calculate);
@@ -121,6 +133,12 @@ public class SelectOptionsActivity extends AppCompatActivity {
             String type = type_spinner.getItemAtPosition(type_spinner.getSelectedItemPosition()).toString();
             String amount = amount_spinner.getItemAtPosition(amount_spinner.getSelectedItemPosition()).toString();
             Boolean use_starter = starter_toggle.isChecked();
+
+                Log.i("GA", "Analyticing Options screen");
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Click")
+                        .setAction("Calculate Measurements")
+                        .build());
 
             Intent intent = new Intent(view.getContext(), DetailsActivity.class);
 

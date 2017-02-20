@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import net.arpcentral.pizzadoh.PizzaDohApp;
 import net.arpcentral.pizzadoh.R;
 import net.arpcentral.pizzadoh.models.Step;
 
@@ -36,12 +37,15 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.analytics.HitBuilders;
 
 public class StepsActivity extends AppCompatActivity {
 String TAG = "Steps Activity";
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+    private Tracker mTracker;
 
     @Override
     public void onBackPressed() {
@@ -52,6 +56,16 @@ String TAG = "Steps Activity";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_steps);
+
+        // Obtain the shared Tracker instance.
+        PizzaDohApp application = (PizzaDohApp) getApplication();
+        mTracker = application.getDefaultTracker();
+
+        Log.i("GA", "Analyticing Steps screen");
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("View")
+                .setAction("View Steps")
+                .build());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -156,6 +170,7 @@ String TAG = "Steps Activity";
             args.putString(ARG_STEP_URL, item.getUrl());
             args.putString(ARG_STEP_CATEGORY, item.getCategory());
             fragment.setArguments(args);
+
             return fragment;
         }
 
@@ -215,6 +230,7 @@ String TAG = "Steps Activity";
 
         @Override
         public Fragment getItem(int position){
+
             Intent intent = getIntent();
             final HashMap<String, String> batch_values = (HashMap<String, String>)intent.getSerializableExtra("BATCH");
             String json = readJsonData();
@@ -223,6 +239,12 @@ String TAG = "Steps Activity";
             final ArrayList<Step.Item> prep = steps.getByKey("Preparation");
             final ArrayList<Step.Item> dough = steps.getByKey("Dough");
             final ArrayList<Step.Item> step_items = steps.getAll();
+
+            Log.i("GA", "Analyticing Options screen");
+            mTracker.send(new HitBuilders.EventBuilder()
+                    .setCategory("View")
+                    .setAction("View Specific Step")
+                    .build());
 
             Log.d("STEP ACT" , "Get fragment for step " +  position);
             // put_notification(getIntent(),batch_values, position);

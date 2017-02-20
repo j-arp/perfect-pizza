@@ -20,6 +20,10 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.analytics.HitBuilders;
+
+import net.arpcentral.pizzadoh.PizzaDohApp;
 import net.arpcentral.pizzadoh.R;
 import net.arpcentral.pizzadoh.models.History;
 import net.arpcentral.pizzadoh.models.Ratio;
@@ -40,10 +44,25 @@ public class DetailsActivity extends AppCompatActivity {
     static EditText flour_starter_edit_field = null;
     static EditText water_starter_edit_field = null;
 
+
+    private Tracker mTracker;
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Obtain the shared Tracker instance.
+        PizzaDohApp application = (PizzaDohApp) getApplication();
+        mTracker = application.getDefaultTracker();
+
+
+        Log.i("GA", "Analyticing results screen");
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("View")
+                .setAction("View Measurement Details")
+                .build());
+
         setContentView(R.layout.activity_details);
         final String TAG = "Details Activity";
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -271,11 +290,6 @@ public class DetailsActivity extends AppCompatActivity {
                 return handled;
             }
         });
-
-
-
-
-
 
 
     }

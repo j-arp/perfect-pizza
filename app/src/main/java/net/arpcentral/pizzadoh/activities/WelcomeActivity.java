@@ -14,19 +14,32 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.analytics.HitBuilders;
 
+
+import net.arpcentral.pizzadoh.PizzaDohApp;
 import net.arpcentral.pizzadoh.R;
 
 public class WelcomeActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle mDrawerToggle;
-
+    private Tracker mTracker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        PizzaDohApp application = (PizzaDohApp) getApplication();
+        mTracker = application.getDefaultTracker();
+        Log.i("GA", "Analyticing Welcome screen");
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("View")
+                .setAction("View Welcome Screen")
+                .build());
 
         if (getSupportActionBar() != null){
             getSupportActionBar().setTitle("Perfect Pizza Forever");

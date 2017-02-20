@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "716701543117",
+    "project_id": "perfect-pizza-dough-forever"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716701543117:android:9091e016b9087738",
+        "android_client_info": {
+          "package_name": "net.arpcentral.pizzadoh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAOP3EpM2p3qu5xZetyywNOxHKoHBHMQ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-92307332-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
