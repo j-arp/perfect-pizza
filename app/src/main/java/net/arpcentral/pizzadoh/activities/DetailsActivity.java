@@ -1,14 +1,20 @@
 package net.arpcentral.pizzadoh.activities;
 
-import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationChannelCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -27,6 +33,26 @@ import net.arpcentral.pizzadoh.models.Ratio;
 import java.util.HashMap;
 
 public class DetailsActivity extends AppCompatActivity {
+
+    private static final String CHANNEL_ID = "pizza_measurements";
+    private static final int NOTIFICATION_PERMISSION_REQUEST = 1001;
+
+    /** Creates the notification channel (no-op before API 26) and posts if the app is allowed to. */
+    private void postNotification(int id, NotificationCompat.Builder builder) {
+        NotificationManagerCompat manager = NotificationManagerCompat.from(this);
+        manager.createNotificationChannel(
+                new NotificationChannelCompat.Builder(CHANNEL_ID, NotificationManagerCompat.IMPORTANCE_DEFAULT)
+                        .setName("Pizza measurements")
+                        .build());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                   != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION_REQUEST);
+            return;
+        }
+        manager.notify(id, builder.build());
+    }
     public final String Tag = "DetailsActivity";
     final Integer DEFAULT_WATER = 150;
     final Integer DEFAULT_FLOUR = 100;
@@ -142,7 +168,7 @@ public class DetailsActivity extends AppCompatActivity {
 
 
         NotificationCompat.Builder mBuilder =
-                (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                (NotificationCompat.Builder) new NotificationCompat.Builder(this, CHANNEL_ID)
                         .setSmallIcon(R.mipmap.ic_scales)
                         .setContentTitle("Perfect Pizza")
                         .setContentInfo("Your measurements for " + batch_values.get("AMOUNT") + " " + batch_values.get("TYPE") + " styled pizzas.")
@@ -163,9 +189,6 @@ public class DetailsActivity extends AppCompatActivity {
         mBuilder.setStyle(inboxStyle);
 
         int mNotificationId = 001;
-        // Gets an instance of the NotificationManager service
-        NotificationManager mNotifyMgr =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         // Builds the notification and issues it.
 
 
@@ -187,12 +210,12 @@ public class DetailsActivity extends AppCompatActivity {
                         this,
                         mNotificationId,
                         resultIntent,
-                        PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_CANCEL_CURRENT
+                        PendingIntent.FLAG_IMMUTABLE
                 );
 
 
         mBuilder.setContentIntent(resultPendingIntent);
-        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+        postNotification(mNotificationId, mBuilder);
 
 
 

@@ -1,20 +1,26 @@
 package net.arpcentral.pizzadoh.activities;
 
-import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationChannelCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.appcompat.widget.Toolbar;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +44,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StepsActivity extends AppCompatActivity {
+
+    private static final String CHANNEL_ID = "pizza_measurements";
+    private static final int NOTIFICATION_PERMISSION_REQUEST = 1001;
+
+    /** Creates the notification channel (no-op before API 26) and posts if the app is allowed to. */
+    private void postNotification(int id, NotificationCompat.Builder builder) {
+        NotificationManagerCompat manager = NotificationManagerCompat.from(this);
+        manager.createNotificationChannel(
+                new NotificationChannelCompat.Builder(CHANNEL_ID, NotificationManagerCompat.IMPORTANCE_DEFAULT)
+                        .setName("Pizza measurements")
+                        .build());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                   != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION_REQUEST);
+            return;
+        }
+        manager.notify(id, builder.build());
+    }
 String TAG = "Steps Activity";
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -270,16 +296,13 @@ String TAG = "Steps Activity";
 
     public void put_notification(Intent intent, HashMap<String,String> batch_values, int step_number){
         NotificationCompat.Builder mBuilder =
-                (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                (NotificationCompat.Builder) new NotificationCompat.Builder(this, CHANNEL_ID)
                         .setSmallIcon(R.drawable.ic_mood_black_24dp)
                         .setContentTitle("Perfect Pizza")
                         .setContentInfo("Go back to step " + step_number)
                 ;
 
         int mNotificationId = 001;
-        // Gets an instance of the NotificationManager service
-        NotificationManager mNotifyMgr =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         // Builds the notification and issues it.
         Intent resultIntent = new Intent(this, StepsActivity.class);
@@ -297,12 +320,12 @@ String TAG = "Steps Activity";
                         this,
                         mNotificationId,
                         resultIntent,
-                        PendingIntent.FLAG_ONE_SHOT|PendingIntent.FLAG_CANCEL_CURRENT
+                        PendingIntent.FLAG_IMMUTABLE
                 );
 
 
         mBuilder.setContentIntent(resultPendingIntent);
-        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+        postNotification(mNotificationId, mBuilder);
     }
 
     private String readJsonData() {
