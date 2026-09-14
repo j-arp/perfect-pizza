@@ -47,11 +47,69 @@ public class DetailsActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
                 && ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
                    != PackageManager.PERMISSION_GRANTED) {
+            pendingNotification = builder;
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION_REQUEST);
             return;
         }
+        pendingNotification = null;
         manager.notify(id, builder.build());
+    }
+
+    /** Builder waiting on the POST_NOTIFICATIONS grant; posted from onRequestPermissionsResult. */
+    private NotificationCompat.Builder pendingNotification = null;
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == NOTIFICATION_PERMISSION_REQUEST
+                && grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                && pendingNotification != null) {
+            postNotification(MEASUREMENT_NOTIFICATION_ID, pendingNotification);
+        }
+    }
+
+    private static final int MEASUREMENT_NOTIFICATION_ID = 1;
+
+    /**
+     * Posts (or replaces) the measurement notification. Phone notifications are bridged to a
+     * paired Wear OS watch, so the content text carries the numbers for the collapsed card and
+     * the InboxStyle lines carry the full breakdown for the expanded view.
+     */
+    private void postMeasurementNotification(HashMap<String, String> batch_values, boolean use_starter,
+                                             String starter_water_text, String starter_flour_text,
+                                             int flour, int water) {
+        String summary = "Flour " + flour + "g / Water " + water + "g";
+
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle()
+                .setBigContentTitle("Your Pizza Dough Measurement:")
+                .setSummaryText(batch_values.get("AMOUNT") + " " + batch_values.get("TYPE") + " pizzas");
+        if (use_starter) {
+            inboxStyle.addLine("Starter: " + starter_water_text + "g water / " + starter_flour_text + "g flour");
+        }
+        inboxStyle.addLine("Flour: " + flour + " grams");
+        inboxStyle.addLine("Water: " + water + " grams");
+
+        Intent resultIntent = new Intent(this, DetailsActivity.class);
+        resultIntent.putExtra("BATCH", batch_values);
+        resultIntent.putExtra("STEP", 0);
+        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(
+                this, MEASUREMENT_NOTIFICATION_ID, resultIntent,
+                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.mipmap.ic_scales)
+                .setContentTitle("Perfect Pizza")
+                .setContentText(summary)
+                .setStyle(inboxStyle)
+                .setContentIntent(resultPendingIntent)
+                .setOnlyAlertOnce(true)
+                .setCategory(NotificationCompat.CATEGORY_STATUS)
+                .setLocalOnly(false);
+
+        postNotification(MEASUREMENT_NOTIFICATION_ID, builder);
     }
     public final String Tag = "DetailsActivity";
     final Integer DEFAULT_WATER = 150;
@@ -167,55 +225,8 @@ public class DetailsActivity extends AppCompatActivity {
 
 
 
-        NotificationCompat.Builder mBuilder =
-                (NotificationCompat.Builder) new NotificationCompat.Builder(this, CHANNEL_ID)
-                        .setSmallIcon(R.mipmap.ic_scales)
-                        .setContentTitle("Perfect Pizza")
-                        .setContentInfo("Your measurements for " + batch_values.get("AMOUNT") + " " + batch_values.get("TYPE") + " styled pizzas.")
-                ;
-
-
-        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-        String[] events = new String[6];
-        // Sets a title for the Inbox in expanded layout
-        inboxStyle.setBigContentTitle("Your Pizza Dough Measurement:");
-        if ( use_starter  ) {
-            inboxStyle.addLine("Starter: " + starting_water_text + "g water / " + starting_flour_text + "g flour");
-        }
-        inboxStyle.addLine("Flour: " + adjusted_flour +   " grams");
-        inboxStyle.addLine("Water: " + adjusted_water +   " grams");
-
-        // Moves the expanded layout object into the notification object.
-        mBuilder.setStyle(inboxStyle);
-
-        int mNotificationId = 001;
-        // Builds the notification and issues it.
-
-
-
-        Intent resultIntent = new Intent(this, DetailsActivity.class);
-        resultIntent.putExtra("BATCH", batch_values);
-        resultIntent.putExtra("STEP", 0);
-
-        Log.d(TAG, "getting amount and type: " + batch_values.get("AMOUNT") + " / " + batch_values.get("TYPE"));
-
-
-
-        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        // Because clicking the notification opens a new ("special") activity, there's
-        // no need to create an artificial back stack.
-        PendingIntent resultPendingIntent =
-                PendingIntent.getActivity(
-                        this,
-                        mNotificationId,
-                        resultIntent,
-                        PendingIntent.FLAG_IMMUTABLE
-                );
-
-
-        mBuilder.setContentIntent(resultPendingIntent);
-        postNotification(mNotificationId, mBuilder);
+        postMeasurementNotification(batch_values, use_starter,
+                starting_water_text, starting_flour_text, adjusted_flour, adjusted_water);
 
 
 
@@ -268,6 +279,11 @@ public class DetailsActivity extends AppCompatActivity {
                     history.setStarterWater(v.getText().toString());
                     hide_keyboard(flour_starter_edit_field);
                     History.replaceLast(history);
+                    postMeasurementNotification(batch_values, use_starter,
+                            water_starter_text_field.getText().toString(),
+                            flour_starter_text_field.getText().toString(),
+                            Integer.parseInt(flour_text_field.getText().toString()),
+                            Integer.parseInt(water_text_field.getText().toString()));
                     handled = true;
                 }
                 return handled;
@@ -289,6 +305,11 @@ public class DetailsActivity extends AppCompatActivity {
                     history.setStarterFlour(v.getText().toString());
                     History.replaceLast(history);
                     hide_keyboard(flour_starter_edit_field);
+                    postMeasurementNotification(batch_values, use_starter,
+                            water_starter_text_field.getText().toString(),
+                            flour_starter_text_field.getText().toString(),
+                            Integer.parseInt(flour_text_field.getText().toString()),
+                            Integer.parseInt(water_text_field.getText().toString()));
                     handled = true;
                 }
                 return handled;
