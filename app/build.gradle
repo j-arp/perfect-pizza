@@ -7,10 +7,13 @@ android {
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "net.arpcentral.pizzadoh"
+        // New Play listing (2026-09): the original 2016 signing key for
+        // net.arpcentral.pizzadoh was lost, so the app is republished under a new id.
+        // namespace stays net.arpcentral.pizzadoh so source packages are unchanged.
+        applicationId = "net.arpcentral.pizzadoh2"
         minSdk = 21
         targetSdk = 37
-        versionCode = 9
+        versionCode = 1
         versionName = "1.3.0"
     }
 
