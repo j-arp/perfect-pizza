@@ -10,12 +10,35 @@ android {
         applicationId = "net.arpcentral.pizzadoh"
         minSdk = 21
         targetSdk = 37
-        versionCode = 8
-        versionName = "1.2.3"
+        versionCode = 9
+        versionName = "1.3.0"
+    }
+
+    // Release/upload signing. Credentials live in local.properties (gitignored):
+    //   RELEASE_STORE_FILE=/absolute/path/to/upload.jks
+    //   RELEASE_STORE_PASSWORD=...
+    //   RELEASE_KEY_ALIAS=upload
+    //   RELEASE_KEY_PASSWORD=...
+    def signingProps = new Properties()
+    def localPropsFile = rootProject.file('local.properties')
+    if (localPropsFile.exists()) localPropsFile.withInputStream { signingProps.load(it) }
+    def releaseStoreFile = signingProps.getProperty('RELEASE_STORE_FILE')
+    def hasReleaseSigning = releaseStoreFile != null && rootProject.file(releaseStoreFile).exists()
+
+    signingConfigs {
+        release {
+            if (hasReleaseSigning) {
+                storeFile = rootProject.file(releaseStoreFile)
+                storePassword = signingProps.getProperty('RELEASE_STORE_PASSWORD', '')
+                keyAlias = signingProps.getProperty('RELEASE_KEY_ALIAS', 'upload')
+                keyPassword = signingProps.getProperty('RELEASE_KEY_PASSWORD', '')
+            }
+        }
     }
 
     buildTypes {
         release {
+            if (hasReleaseSigning) signingConfig = signingConfigs.release
             minifyEnabled = false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
